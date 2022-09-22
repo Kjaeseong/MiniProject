@@ -4,14 +4,19 @@ using UnityEngine;
 
 public class Coin : MonoBehaviour
 {
+    [SerializeField]
+    private float rotationSpeed = 120f;
     private Vector2 _touchPosition;
-    void Start()
+    private void OnEnable()
     {
         StartCoroutine(Remain());
     }
 
-    void Update()
+    private void Update()
     {
+        Spinning();
+        _touchPosition = new Vector2(100f, 100f);
+
         if (Input.GetMouseButton(0))
         {
             _touchPosition = Input.mousePosition;
@@ -28,13 +33,21 @@ public class Coin : MonoBehaviour
 
         if (hit.collider != null)
         {
-            //touch event;
+            GameManager.Instance.GetCoin();
+            StopCoroutine(Remain());
             this.gameObject.SetActive(false);
         }
     }
+
+    private void Spinning()
+    {
+        transform.Rotate(new Vector3(0f, rotationSpeed * Time.deltaTime, 0f));
+    }
+
     IEnumerator Remain()
     {
         yield return new WaitForSeconds(5f);
+        transform.rotation = Quaternion.identity;
         gameObject.SetActive(false);
     }
 }
