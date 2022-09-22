@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class PlayerInput : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public bool A;
+
+
+    private void Update() 
     {
-        
+        if(Input.GetKey(KeyCode.A))
+        {
+            A = true;
+        }
+        else
+        {
+            A = false;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }
