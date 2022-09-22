@@ -25,19 +25,18 @@ public class Coin : MonoBehaviour
     {
         if(!TimeOut)
         {
-            GameManager.Instance.Money += 5;
+            //GameManager.Instance.Money += 5;
         }
     }
 
     private void Update() 
     {
-        MoveCoin();
         CountingTime();
     }
 
-    private void MoveCoin()
+    private void RotationCoin()
     {
-        transform.position = new Vector2(0f, transform.position.y - _moveSpeed * Time.deltaTime);
+
     }
 
     private void CountingTime()
@@ -45,7 +44,6 @@ public class Coin : MonoBehaviour
         if(CountTime <= 0)
         {
             TimeOut = true;
-
             gameObject.SetActive(false);
         }
         else
