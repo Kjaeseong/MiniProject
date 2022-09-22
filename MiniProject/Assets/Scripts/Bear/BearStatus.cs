@@ -12,7 +12,6 @@ public class BearStatus : MonoBehaviour
     {
         _coinPosition = transform.GetChild(0).gameObject;
 
-
         StartCoroutine(SpawnCoin());
     }
 

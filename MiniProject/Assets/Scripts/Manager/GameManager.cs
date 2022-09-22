@@ -56,7 +56,8 @@ public class GameManager : SingletonBehaviour<GameManager>
             RemainCoin -= BearPrice;
             _goldUI.text = $"Gold : {RemainCoin}G";
             ++BearCount;
-            int num = Random.Range(0, 5);
+            int num = Random.Range(0, 4);
+            Debug.Log(num);
             GameObject SpawnBear = Instantiate(Bear);
 
             SpawnBear.transform.position = SpawnPositions[num].transform.position;
