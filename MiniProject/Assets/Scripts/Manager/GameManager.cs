@@ -1,10 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
-//-2.5~3.5
-//-1.8~1.8
 public class GameManager : SingletonBehaviour<GameManager>
 {
     public UnityEvent Spawn = new UnityEvent();
@@ -13,6 +12,20 @@ public class GameManager : SingletonBehaviour<GameManager>
 
     [SerializeField]
     private GameObject Bear;
+
+    [SerializeField]
+    private GameObject[] SpawnPositions;
+
+    [SerializeField]
+    private TextMeshProUGUI _goldUI;
+    [SerializeField]
+    private TextMeshProUGUI _bearPrice;
+
+    public int RemainCoin { get; private set; }
+
+    public int GetCoinAmount = 5;
+    public int BearPrice = 1000;
+
 
     public int BearCount { get; private set; }
 
@@ -23,22 +36,34 @@ public class GameManager : SingletonBehaviour<GameManager>
 
     private void Update()
     {
+        _bearPrice.text = $"Buy\nBear\n{BearPrice}G";
     }
+
     public void GetCoin()
     {
-        CoinGet.Invoke();
+        RemainCoin += GetCoinAmount;
+        _goldUI.text = $"Gold : {RemainCoin}G";
     }
 
     public void BuyNewBear()
     {
-        ++BearCount;
-        float y = Random.Range(-2.5f, 3.5f);
-        float x = Random.Range(-1.8f, 1.8f);
-        GameObject SpawnBear = Instantiate(Bear);
+        if(RemainCoin - BearPrice < 0)
+        {
+            return;
+        }
+        else
+        {
+            RemainCoin -= BearPrice;
+            _goldUI.text = $"Gold : {RemainCoin}G";
+            ++BearCount;
+            int num = Random.Range(0, 4);
+            Debug.Log(num);
+            GameObject SpawnBear = Instantiate(Bear);
 
-        SpawnBear.transform.position = new Vector3(x, y, 0f);
-        Spawn.Invoke();
-        BuyBear.Invoke();
+            SpawnBear.transform.position = SpawnPositions[num].transform.position;
+            Spawn.Invoke();
+            BuyBear.Invoke();
+        }
     }
 
 }
