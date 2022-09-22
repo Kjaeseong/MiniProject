@@ -260,7 +260,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7354825533296339094, guid: d4263889781eed149963644707747671, type: 3}
       propertyPath: m_Name
-      value: Coin
+      value: JS_Coin
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d4263889781eed149963644707747671, type: 3}
@@ -321,7 +321,7 @@ GameObject:
   - component: {fileID: 1054712125}
   - component: {fileID: 1054712124}
   m_Layer: 0
-  m_Name: Bear
+  m_Name: JS_Bear
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

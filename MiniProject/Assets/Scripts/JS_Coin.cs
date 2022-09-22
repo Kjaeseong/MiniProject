@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Coin : MonoBehaviour
+public class JS_Coin : MonoBehaviour
 {
 
     private bool TimeOut;
@@ -17,7 +17,6 @@ public class Coin : MonoBehaviour
 
     private void OnEnable() 
     {
-        transform.position = transform.parent.position;
         CountTime = CountTimeDefault;
     }
 
