@@ -1066,6 +1066,15 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   Bear: {fileID: 7717357897842414328, guid: 41e71ddd92bd6c84a8a8dcf406720862, type: 3}
+  SpawnPositions:
+  - {fileID: 33602542}
+  - {fileID: 67480974}
+  - {fileID: 2124556501}
+  - {fileID: 289698311}
+  _goldUI: {fileID: 1943515635}
+  _bearPrice: {fileID: 56879145}
+  GetCoinAmount: 5
+  BearPrice: 1000
 --- !u!4 &822606082
 Transform:
   m_ObjectHideFlags: 0
@@ -1369,7 +1378,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1367388917}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 822606081}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: BuyNewBear
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1367388917
 MonoBehaviour:
   m_ObjectHideFlags: 0
