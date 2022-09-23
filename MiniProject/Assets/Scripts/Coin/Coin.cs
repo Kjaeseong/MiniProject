@@ -38,7 +38,7 @@ public class Coin : MonoBehaviour
         {
             GameManager.Instance.GetCoin();
             StopCoroutine(Remain());
-            this.gameObject.SetActive(false);
+            hit.collider.gameObject.SetActive(false);
         }
     }
 

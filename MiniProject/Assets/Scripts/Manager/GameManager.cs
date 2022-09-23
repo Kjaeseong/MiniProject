@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class GameManager : SingletonBehaviour<GameManager>
 {
     public UnityEvent BuyFood = new UnityEvent();
+    public UnityEvent StopCoin = new UnityEvent();
+    public UnityEvent RestartCoin = new UnityEvent();
 
     [SerializeField] //곰 오브젝트
     private GameObject _bear;
@@ -20,6 +23,10 @@ public class GameManager : SingletonBehaviour<GameManager>
     private TextMeshProUGUI _foodPriceUI;
     [SerializeField] // 게이지 매니저
     private GagueManager _gagueManager;
+    [SerializeField] // 일시정지메뉴
+    private GameObject _pauseMenu;
+    [SerializeField]
+    private GameObject _positions;
 
     public int RemainCoin { get; private set; }
 
@@ -27,10 +34,18 @@ public class GameManager : SingletonBehaviour<GameManager>
     public int BearPrice = 1000;
     public int FoodPrice = 100;
 
+    public bool IsShowMenu { get; private set; }
+
     public int BearCount { get; private set; }
 
     private void Start()
     {
+        _spawnPositions = new GameObject[4];
+        for (int i = 0; i < 4; ++i)
+        {
+            _spawnPositions[i] = _positions.transform.GetChild(i).gameObject;
+        }
+        IsShowMenu = false;
         BearCount = 1;
     }
 
@@ -52,11 +67,52 @@ public class GameManager : SingletonBehaviour<GameManager>
     }
 
     /// <summary>
+    /// 타이틀씬으로 돌아가기
+    /// </summary>
+    public void GoingToTitleScene()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(0);
+    }
+
+    /// <summary>
+    /// 포만감 0일때 코인 생성 멈춤
+    /// </summary>
+    public void StopSpawnCoin()
+    {
+        StopCoin.Invoke();
+    }
+
+    /// <summary>
+    /// 0에서 회복되었을때 다시 코인 생성 시작
+    /// </summary>
+    public void ContinueCoinSpawn()
+    {
+        RestartCoin.Invoke();
+    }
+
+    /// <summary>
+    /// 메뉴 닫기
+    /// </summary>
+    public void Menu()
+    {
+        IsShowMenu = !IsShowMenu;
+        if(IsShowMenu == true)
+        {
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            Time.timeScale = 1f;
+        }
+        _pauseMenu.SetActive(IsShowMenu);
+    }
+    /// <summary>
     /// 곰 살때 실행되는 함수
     /// </summary>
     public void BuyNewBear()
     {
-        if(RemainCoin - BearPrice < 0)
+        if (RemainCoin - BearPrice < 0 || BearCount == 20)
         {
             return;
         }
