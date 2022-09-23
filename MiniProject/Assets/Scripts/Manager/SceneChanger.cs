@@ -5,6 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class SceneChanger : MonoBehaviour
 {
+
+    public void TitleScene()
+    {
+        SceneManager.LoadScene("JS_TItleScene");
+    }
+
     public void MainScene()
     {
         SceneManager.LoadScene("ParkDoilScene");
