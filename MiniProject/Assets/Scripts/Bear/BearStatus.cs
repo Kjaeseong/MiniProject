@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 // y: 2.8 ~ -4 x : -4.6 ~ 9.6
 public class BearStatus : MonoBehaviour
@@ -29,6 +30,22 @@ public class BearStatus : MonoBehaviour
 
         StartCoroutine(SpawnCoin());
         StartCoroutine(BearMove());
+    }
+
+    private void OnEnable()
+    {
+        GameManager.Instance.StopCoin.AddListener(StopCoinSpawn);
+        GameManager.Instance.RestartCoin.AddListener(RestartCoinSpawn);
+    }
+
+    private void RestartCoinSpawn()
+    {
+        StartCoroutine(SpawnCoin());
+    }
+
+    private void StopCoinSpawn()
+    {
+        StopCoroutine(SpawnCoin());
     }
 
     private void Update()
@@ -132,5 +149,11 @@ public class BearStatus : MonoBehaviour
             ++_playCount;
             yield return new WaitForSeconds(MoveDelayTime);
         }
+    }
+
+    private void OnDisable()
+    {
+        GameManager.Instance.StopCoin.RemoveListener(StopCoinSpawn);
+        GameManager.Instance.RestartCoin.RemoveListener(RestartCoinSpawn);
     }
 }
