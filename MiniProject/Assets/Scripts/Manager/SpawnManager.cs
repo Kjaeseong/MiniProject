@@ -12,6 +12,7 @@ public class SpawnManager : SingletonBehaviour<SpawnManager>
     public GameObject[] CoinGroup;
 
 
+    // 코인 오브젝트 풀링
     private void Start()
     {
         CoinGroup = new GameObject[100];

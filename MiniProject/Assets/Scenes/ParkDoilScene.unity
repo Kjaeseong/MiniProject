@@ -713,6 +713,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hungrygagueUI: {fileID: 1442605842}
   _gagueBar: {fileID: 2086928210}
+  _hungryGague: 0
   RestoreAmount: 1
 --- !u!4 &498076490
 Transform:
@@ -1060,15 +1061,12 @@ MonoBehaviour:
   BuyFood:
     m_PersistentCalls:
       m_Calls: []
-  Bear: {fileID: 7717357897842414328, guid: 41e71ddd92bd6c84a8a8dcf406720862, type: 3}
-  SpawnPositions:
-  - {fileID: 33602542}
-  - {fileID: 67480974}
-  - {fileID: 2124556501}
-  - {fileID: 289698311}
+  _bear: {fileID: 0}
+  _spawnPositions: []
   _goldUI: {fileID: 1943515635}
   _bearPriceUI: {fileID: 56879145}
   _foodPriceUI: {fileID: 791570631}
+  _gagueManager: {fileID: 498076489}
   GetCoinAmount: 5
   BearPrice: 1000
   FoodPrice: 100
