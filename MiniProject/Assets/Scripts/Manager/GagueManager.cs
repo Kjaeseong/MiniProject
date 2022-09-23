@@ -13,7 +13,7 @@ public class GagueManager : MonoBehaviour
     [SerializeField]
     private Image _gagueBar;
 
-    private int _hungryGague;
+    public int _hungryGague;
 
     public int RestoreAmount = 1;
 
@@ -26,6 +26,7 @@ public class GagueManager : MonoBehaviour
     {
         _hungryGague += RestoreAmount;
         _hungrygagueUI.text = $"Hungry : {_hungryGague}";
+        _gagueBar.fillAmount = (float)_hungryGague / 100;
     }
 
     private void Start()
@@ -43,5 +44,10 @@ public class GagueManager : MonoBehaviour
             _hungrygagueUI.text = $"Hungry : {_hungryGague}";
             _gagueBar.fillAmount = (float)_hungryGague / 100;
         }
+    }
+
+    private void OnDisable()
+    {
+        GameManager.Instance.BuyFood.RemoveListener(RestoreHungryGague);
     }
 }
