@@ -155,7 +155,7 @@ MonoBehaviour:
   - {fileID: 7400000, guid: e2a403b749f02b6469ac9125521d301a, type: 2}
   - {fileID: 7400000, guid: 614aaf37cd3548740bcdd651f22c1b50, type: 2}
   MoveDelayTime: 1
-  MoveAmount: 10
+  MoveAmount: 3
 --- !u!1 &7717357897856325858
 GameObject:
   m_ObjectHideFlags: 0
