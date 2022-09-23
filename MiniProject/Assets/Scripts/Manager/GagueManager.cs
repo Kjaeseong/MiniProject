@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class GagueManager : MonoBehaviour
@@ -12,7 +13,21 @@ public class GagueManager : MonoBehaviour
     [SerializeField]
     private Image _gagueBar;
 
-    private int _hungryGague;
+    public int _hungryGague;
+
+    public int RestoreAmount = 1;
+
+    private void OnEnable()
+    {
+        GameManager.Instance.BuyFood.AddListener(RestoreHungryGague);
+    }
+
+    private void RestoreHungryGague()
+    {
+        _hungryGague += RestoreAmount;
+        _hungrygagueUI.text = $"Hungry : {_hungryGague}";
+        _gagueBar.fillAmount = (float)_hungryGague / 100;
+    }
 
     private void Start()
     {
@@ -29,5 +44,10 @@ public class GagueManager : MonoBehaviour
             _hungrygagueUI.text = $"Hungry : {_hungryGague}";
             _gagueBar.fillAmount = (float)_hungryGague / 100;
         }
+    }
+
+    private void OnDisable()
+    {
+        GameManager.Instance.BuyFood.RemoveListener(RestoreHungryGague);
     }
 }
