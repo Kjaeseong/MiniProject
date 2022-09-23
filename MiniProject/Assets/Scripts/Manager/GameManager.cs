@@ -6,9 +6,7 @@ using UnityEngine.Events;
 
 public class GameManager : SingletonBehaviour<GameManager>
 {
-    public UnityEvent Spawn = new UnityEvent();
-    public UnityEvent CoinGet = new UnityEvent();
-    public UnityEvent BuyBear = new UnityEvent();
+    public UnityEvent BuyFood = new UnityEvent();
 
     [SerializeField]
     private GameObject Bear;
@@ -19,12 +17,15 @@ public class GameManager : SingletonBehaviour<GameManager>
     [SerializeField]
     private TextMeshProUGUI _goldUI;
     [SerializeField]
-    private TextMeshProUGUI _bearPrice;
+    private TextMeshProUGUI _bearPriceUI;
+    [SerializeField]
+    private TextMeshProUGUI _foodPriceUI;
 
     public int RemainCoin { get; private set; }
 
     public int GetCoinAmount = 5;
     public int BearPrice = 1000;
+    public int FoodPrice = 100;
 
 
     public int BearCount { get; private set; }
@@ -36,7 +37,8 @@ public class GameManager : SingletonBehaviour<GameManager>
 
     private void Update()
     {
-        _bearPrice.text = $"Buy\nBear\n{BearPrice}G";
+        _bearPriceUI.text = $"Buy\nBear\n{BearPrice}G";
+        _foodPriceUI.text = $"Buy\nFood\n{FoodPrice}G";
     }
 
     public void GetCoin()
@@ -57,12 +59,23 @@ public class GameManager : SingletonBehaviour<GameManager>
             _goldUI.text = $"Gold : {RemainCoin}G";
             ++BearCount;
             int num = Random.Range(0, 4);
-            Debug.Log(num);
             GameObject SpawnBear = Instantiate(Bear);
 
             SpawnBear.transform.position = SpawnPositions[num].transform.position;
-            Spawn.Invoke();
-            BuyBear.Invoke();
+        }
+    }
+
+    public void BuyNewFood()
+    {
+        if (RemainCoin - FoodPrice < 0)
+        {
+            return;
+        }
+        else 
+        {
+            RemainCoin -= FoodPrice;
+            _goldUI.text = $"Gold : {RemainCoin}G";
+            BuyFood.Invoke();
         }
     }
 

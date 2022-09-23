@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class GagueManager : MonoBehaviour
@@ -13,6 +14,19 @@ public class GagueManager : MonoBehaviour
     private Image _gagueBar;
 
     private int _hungryGague;
+
+    public int RestoreAmount = 1;
+
+    private void OnEnable()
+    {
+        GameManager.Instance.BuyFood.AddListener(RestoreHungryGague);
+    }
+
+    private void RestoreHungryGague()
+    {
+        _hungryGague += RestoreAmount;
+        _hungrygagueUI.text = $"Hungry : {_hungryGague}";
+    }
 
     private void Start()
     {
