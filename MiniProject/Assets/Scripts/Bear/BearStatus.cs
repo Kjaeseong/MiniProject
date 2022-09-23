@@ -10,14 +10,22 @@ public class BearStatus : MonoBehaviour
     private float _moveX;
     private float _moveY;
     private float _elapsedTime;
+    private int _playCount;
+    private int _index;
+    private Animator _ani;
+    [SerializeField]
+    private AnimationClip[] _animations;
 
     public float MoveDelayTime = 1f;
     public float MoveAmount = 0.1f;
 
     private void Start()
     {
+        _playCount = 0;
+        _index = Random.Range(1, 13);
         _rigid = GetComponent<Rigidbody2D>();
         _coinPosition = transform.GetChild(0).gameObject;
+        _ani = GetComponent<Animator>();
 
         StartCoroutine(SpawnCoin());
         StartCoroutine(BearMove());
@@ -25,13 +33,30 @@ public class BearStatus : MonoBehaviour
 
     private void Update()
     {
+        // 1초 움직이고 1초 idle 
         _elapsedTime += Time.deltaTime;
         if (_elapsedTime < 1f)
         {
+            _ani.Play("Move", 0);
             MoveBear();
         }
-        else if (_elapsedTime < 2f)
+        else if (_elapsedTime > 1f && _elapsedTime < 2f)
         {
+            if (_index < 10)
+            {
+                _ani.Play($"Bear_IDLE0{_index}", 0);
+            }
+            else
+            {
+                _ani.Play($"Bear_IDLE{_index}", 0);
+
+            }
+
+            if(_playCount > 15)
+            {
+                _playCount = 0;
+                _index = Random.Range(1, 13);
+            }
             return;
         }
         else
@@ -41,6 +66,9 @@ public class BearStatus : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// 곰을 움직인다.
+    /// </summary>
     private void MoveBear()
     {
         Vector2 _horizontalPosition = MoveAmount * Time.deltaTime * _moveX * transform.right;
@@ -72,6 +100,9 @@ public class BearStatus : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 10초마다 곰에서 코인 생성
+    /// </summary>
     IEnumerator SpawnCoin()
     {
         while(true)
@@ -89,12 +120,16 @@ public class BearStatus : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 1초마다 움직일 포지션 재정의
+    /// </summary>
     IEnumerator BearMove()
     {
         while(true)
         {
             _moveX = Random.Range(-1, 2);
             _moveY = Random.Range(-1, 2);
+            ++_playCount;
             yield return new WaitForSeconds(MoveDelayTime);
         }
     }
