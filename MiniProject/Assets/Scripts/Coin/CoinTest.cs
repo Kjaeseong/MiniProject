@@ -52,6 +52,7 @@ public class CoinTest : MonoBehaviour
             GameManager.Instance.GetCoin();
             StopCoroutine(Remain());
             hit.collider.gameObject.SetActive(false);
+            Debug.Log("터치 감지");
         }
         
     }

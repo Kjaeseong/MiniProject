@@ -7,6 +7,7 @@ using UnityEngine.Events;
 public class BearStatusTest : MonoBehaviour
 {
     private GameObject _coinPosition;
+    public GagueManager _gague;
     private Rigidbody2D _rigid;
     private float _moveX;
     private float _moveY;
@@ -27,6 +28,7 @@ public class BearStatusTest : MonoBehaviour
         _rigid = GetComponent<Rigidbody2D>();
         _coinPosition = transform.GetChild(0).gameObject;
         _ani = GetComponent<Animator>();
+        _gague = GameObject.Find("GagueManager").GetComponent<GagueManager>();
 
         StartCoroutine(SpawnCoin());
         StartCoroutine(BearMove());
@@ -129,15 +131,18 @@ public class BearStatusTest : MonoBehaviour
             {
                 if (false == SpawnManager.Instance.CoinGroup[i].activeSelf)
                 {
-                    SpawnManager.Instance.CoinGroup[i].transform.position = _coinPosition.transform.position;
-                    SpawnManager.Instance.CoinGroup[i].SetActive(true);
+                    // 배고픔 게이지 0초과일 때만 코인 생성
+                    if(_gague._hungryGague > 0)
+                    {
+                        SpawnManager.Instance.CoinGroup[i].transform.position = _coinPosition.transform.position;
+                        SpawnManager.Instance.CoinGroup[i].SetActive(true);
 
-                    // 코인 중력효과
-                    // 코인 오브젝트 활성화 시 Bear Y축 좌표 전달
-                    CoinTest coinScript;
-                    coinScript = SpawnManager.Instance.CoinGroup[i].GetComponent<CoinTest>();
-                    coinScript.StopPosition = transform.position.y - 1;
-
+                        // 코인 중력효과
+                        // 코인 오브젝트 활성화 시 Bear Y축 좌표 전달
+                        CoinTest coinScript;
+                        coinScript = SpawnManager.Instance.CoinGroup[i].GetComponent<CoinTest>();
+                        coinScript.StopPosition = transform.position.y - 1;
+                    }
                     break;
                 }
             }
