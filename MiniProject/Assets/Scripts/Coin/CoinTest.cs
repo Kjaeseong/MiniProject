@@ -13,12 +13,10 @@ public class CoinTest : MonoBehaviour
     [SerializeField][Range(0, 1000)] private float PushForce;
     public float StopPosition;
 
-
     private void OnEnable()
     {
+        // 코인 활성화 시 코루틴 시작, 중력 On, 위 방향으로 AddForce
         StartCoroutine(Remain());
-
-        // 코인 활성화 시 Rigidbody 중력 On, 위 방향으로 AddForce
         Rigid.AddForce(transform.up * PushForce);
     }
 
@@ -26,7 +24,7 @@ public class CoinTest : MonoBehaviour
     {
         Spinning();
 
-        // 현재 위치가 활성화시 받아온 위치와 같아지면 그만 떨어짐
+        // 현재 위치가 활성화시 받아온 y축 좌표와 같아지면 그만 떨어짐
         if(transform.position.y <= StopPosition)
         {
             StopFalling();
@@ -34,13 +32,13 @@ public class CoinTest : MonoBehaviour
 
         _touchPosition = new Vector2(100f, 100f);
 
-        // PC용 코드
+        // PC 마우스 클릭
         if (Input.GetMouseButton(0))
         {
             _touchPosition = Input.mousePosition;
         }
 
-        // 모바일용 코드
+        // 모바일디바이스 터치
         if (Input.touchCount > 0)
         {
             _touchPosition = Input.GetTouch(0).position;
