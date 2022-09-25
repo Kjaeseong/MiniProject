@@ -6,17 +6,25 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class GagueManager : MonoBehaviour
+public class JS_GagueManagerTest : MonoBehaviour
 {
     [SerializeField] // 배고픔 게이지 UI
     private TextMeshProUGUI _hungrygagueUI;
     [SerializeField] // 배고픔 UI 바
     private Image _gagueBar;
 
+    [SerializeField] private TextMeshProUGUI _happyGagueUI;
+    [SerializeField] private Image _happyGagueBar;
+
+
     private float DecreaseTime = 10f;
     // 배고픔 수치
-    public int _hungryGague;
+    
     // 먹이 살때 회복되는 양 (테스트용 public 추후 private 수정 예정)
+    [Range(0, 100)]public int _hungryGague;
+    // 행복게이지 (테스트용 public, 추후 private 수정 예정)
+    [Range(0, 100)]public int _happyGague;
+
     public int RestoreAmount = 1;
 
     private void OnEnable()
@@ -66,5 +74,44 @@ public class GagueManager : MonoBehaviour
     private void OnDisable()
     {
         GameManager.Instance.BuyFood.RemoveListener(RestoreHungryGague);
+    }
+
+    private void FixedUpdate() 
+    {
+        GagueIvent();
+        _happyGague++;
+    }
+
+    private void GagueIvent()
+    {
+        _happyGagueUI.text = _happyGague.ToString();
+        _hungrygagueUI.text = _hungryGague.ToString();
+
+        if(_happyGague >= 100)
+        {
+            // 인테리어 해방
+            GameManager.Instance.GetIventCoin(500);
+            _happyGague -= 50;
+        }
+        else if(_happyGague >= 90)
+        {
+            Debug.Log("Green / 피버 이벤트 / 코인 생산시간 절반, 생산코인 * 2 / Dance 모션");
+            
+        }
+        else if(16 <= _happyGague && _happyGague <= 25)
+        {
+            Debug.Log("Orange / 앵그리곰이벤트 / 코인 생산시간 2배 / Idle모션 랜덤출력");
+        }
+        else if(1 <= _happyGague && _happyGague <= 15)
+        {
+            Debug.Log("Red / 가출 이벤트, 20초마다 랜덤으로 곰 -1 / Fade Out");
+        }
+        else if(0 >= _happyGague)
+        {
+            Debug.Log("Game Over");
+        }
+
+
+
     }
 }
