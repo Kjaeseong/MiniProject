@@ -19,14 +19,18 @@ public class CoinTest : MonoBehaviour
         StartCoroutine(Remain());
 
         // 코인 활성화 시 Rigidbody 중력 On, 위 방향으로 AddForce
-        Rigid.simulated = true;
         Rigid.AddForce(transform.up * PushForce);
     }
 
     private void Update()
     {
         Spinning();
-        Moving();
+
+        // 현재 위치가 활성화시 받아온 위치와 같아지면 그만 떨어짐
+        if(transform.position.y <= StopPosition)
+        {
+            StopFalling();
+        }
 
         _touchPosition = new Vector2(100f, 100f);
 
@@ -52,7 +56,6 @@ public class CoinTest : MonoBehaviour
             GameManager.Instance.GetCoin();
             StopCoroutine(Remain());
             hit.collider.gameObject.SetActive(false);
-            Debug.Log("터치 감지");
         }
         
     }
@@ -76,13 +79,11 @@ public class CoinTest : MonoBehaviour
     }
 
     /// <summary>
-    /// 생성 시점의 케릭터 y좌표에 닿을때까지 중력 적용
+    /// 떨어지는것 멈춤
     /// </summary>
-    private void Moving()
+    private void StopFalling()
     {
-        if(transform.position.y <= StopPosition)
-        {
-            Rigid.simulated = false;
-        }
+        transform.position = new Vector3(transform.position.x, StopPosition, 0f);
     }
+    
 }
