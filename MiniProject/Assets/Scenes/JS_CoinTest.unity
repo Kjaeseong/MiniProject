@@ -1178,6 +1178,7 @@ GameObject:
   m_Component:
   - component: {fileID: 498076490}
   - component: {fileID: 498076489}
+  - component: {fileID: 498076491}
   m_Layer: 0
   m_Name: GagueManager
   m_TagString: Untagged
@@ -1192,7 +1193,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 498076488}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 799a12e6b002b2a4f8ce9de311345124, type: 3}
   m_Name: 
@@ -1216,6 +1217,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &498076491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 498076488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf8c5229a1e8b264a99502908f6817aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hungrygagueUI: {fileID: 221544521}
+  _gagueBar: {fileID: 2086928210}
+  _happyGagueUI: {fileID: 221544521}
+  _happyGagueBar: {fileID: 486649778}
+  _hungryGague: 0
+  _happyGague: 0
+  RestoreAmount: 1
 --- !u!1 &603937158
 GameObject:
   m_ObjectHideFlags: 0
