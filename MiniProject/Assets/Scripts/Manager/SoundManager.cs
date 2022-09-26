@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-    [Range(0, 100)]public float BgmVolume = 50f;
-    [Range(0, 100)]public float SeVolume = 50f;
+    [Range(0, 1)]public float BgmVolume = 0.5f;
+    [Range(0, 1)]public float SeVolume = 0.5f;
 
     private AudioSource Bgm;
     private AudioSource Se;
@@ -33,7 +33,7 @@ public class SoundManager : MonoBehaviour
             Bgm.Play();
         }
     }
-    
+
     public void BgmStop()
     {
         Bgm.Stop();
@@ -67,6 +67,13 @@ public class SoundManager : MonoBehaviour
     public void ClickStop()
     {
         Click.Stop();
+    }
+
+    public void ChangeVolume()
+    {
+        Bgm.volume = BgmVolume;
+        Se.volume = SeVolume;
+        Click.volume = SeVolume;
     }
 
     

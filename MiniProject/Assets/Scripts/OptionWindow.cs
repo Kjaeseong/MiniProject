@@ -22,6 +22,8 @@ public class OptionWindow : MonoBehaviour
     {
         SoundManagement.BgmVolume = BgmSlider.value;
         SoundManagement.SeVolume = SeSlider.value;
+
+        SoundManagement.ChangeVolume();
     }
 
     public void DeActivate()
