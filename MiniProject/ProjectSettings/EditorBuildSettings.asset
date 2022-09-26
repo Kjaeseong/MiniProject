@@ -15,6 +15,6 @@ EditorBuildSettings:
     path: Assets/Scenes/TItleScene.unity
     guid: 7e7dd73ecd307814abe2ebca675fca0b
   - enabled: 1
-    path: Assets/Scenes/JS_CoinTest.unity
-    guid: b1be1d78c92bc0443b74d8e7ed4279a9
+    path: Assets/Scenes/MainGameScene.unity
+    guid: 3b1408a3cce36584aa932007e13f8ce3
   m_configObjects: {}
