@@ -5,6 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class SceneChanger : MonoBehaviour
 {
+    public GameObject _optionWindow;
+    public GameObject _titleWindow;
+
+    private void Start() 
+    {
+        _optionWindow.SetActive(false);
+    }
 
     public void TitleScene()
     {
@@ -18,7 +25,8 @@ public class SceneChanger : MonoBehaviour
 
     public void OptionScene()
     {
-        SceneManager.LoadScene("OptionScene");
+        _optionWindow.SetActive(true);
+        _titleWindow.SetActive(false);
     }
 
     public void CreditScene()
