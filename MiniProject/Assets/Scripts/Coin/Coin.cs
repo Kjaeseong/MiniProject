@@ -12,7 +12,6 @@ public class Coin : MonoBehaviour
     // 테스트 결과 150 권장.
     [SerializeField] [Range(0, 1000)] private float PushForce;
     public float StopPosition;
-    private Vector3 FixPosition;
 
     private void Awake()
     {
