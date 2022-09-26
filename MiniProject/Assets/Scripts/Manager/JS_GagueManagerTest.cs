@@ -88,12 +88,9 @@ public class JS_GagueManagerTest : MonoBehaviour
 
     private void GagueUpdate()
     {
-        _hungrygagueUI.text = $"Hungry : {_hungryGague.ToString()}";
-        _happyGagueUI.text = $"Happy : {_happyGague.ToString()}";
+        _happyGagueUI.text = $"Happy : {_happyGague}";
         _happyGagueBar.fillAmount = (float)_happyGague / 100;
         
-        
-
         if(_happyGague >= 100)
         {
             BuffManager.EventStep = 4;
