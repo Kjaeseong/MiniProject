@@ -13,15 +13,15 @@ public class OptionWindow : MonoBehaviour
 
     private void OnEnable() 
     {
-        BgmSlider.value = SoundManagement.BgmVolume / 100;
-        SeSlider.value = SoundManagement.SeVolume / 100;
+        BgmSlider.value = SoundManagement.BgmVolume;
+        SeSlider.value = SoundManagement.SeVolume;
         _titleWindow.SetActive(false);
     }
 
     void FixedUpdate()
     {
-        SoundManagement.BgmVolume = BgmSlider.value * 100;
-        SoundManagement.SeVolume = SeSlider.value * 100;
+        SoundManagement.BgmVolume = BgmSlider.value;
+        SoundManagement.SeVolume = SeSlider.value;
     }
 
     public void DeActivate()
