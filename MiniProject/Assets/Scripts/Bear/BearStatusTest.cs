@@ -15,23 +15,24 @@ public class BearStatusTest : MonoBehaviour
     private int _playCount;
     private int _index;
     private Animator _ani;
-    [SerializeField]
-    private AnimationClip[] _animations;
 
     public float MoveDelayTime = 1f;
     public float MoveAmount = 0.1f;
 
+    [SerializeField]
+    private int _animationCount = 13;
+
     private void Start()
     {
         _playCount = 0;
-        _index = Random.Range(1, 13);
+        _index = Random.Range(1, 14);
         _rigid = GetComponent<Rigidbody2D>();
         _coinPosition = transform.GetChild(0).gameObject;
         _ani = GetComponent<Animator>();
         _gague = GameObject.Find("GagueManager").GetComponent<JS_GagueManagerTest>();
 
-        StartCoroutine(SpawnCoin());
-        StartCoroutine(BearMove());
+        StartCoroutine(BirthBear());
+
     }
 
     private void OnEnable()
@@ -52,37 +53,30 @@ public class BearStatusTest : MonoBehaviour
 
     private void Update()
     {
-        // 1초 움직이고 1초 idle 
+        // 2초 움직이고 4초 IDLE
         _elapsedTime += Time.deltaTime;
-        if (_elapsedTime < 1f)
+        if (_elapsedTime < 2f)
         {
-            _ani.Play("Move", 0);
             MoveBear();
         }
-        else if (_elapsedTime > 1f && _elapsedTime < 2f)
+        else if (_elapsedTime > 2f && _elapsedTime < 6f)
         {
-            if (_index < 10)
+            if (false == _ani.GetBool($"isIDLE{_index}"))
             {
-                _ani.Play($"Bear_IDLE0{_index}", 0);
+                _ani.SetBool($"isIDLE{_index}", true);
             }
-            else
-            {
-                _ani.Play($"Bear_IDLE{_index}", 0);
-
-            }
-
-            if(_playCount > 15)
-            {
-                _playCount = 0;
-                _index = Random.Range(1, 13);
-            }
-            return;
         }
-        else
+        if(_elapsedTime >= 6f)
         {
             _elapsedTime = 0.0f;
         }
-        
+
+        if (_playCount > 15)
+        {
+            _playCount = 0;
+            _index = Random.Range(1, 14);
+        }
+
     }
 
     /// <summary>
@@ -90,6 +84,12 @@ public class BearStatusTest : MonoBehaviour
     /// </summary>
     private void MoveBear()
     {
+        _ani.SetTrigger("Move");
+        for (int i = 1; i <= _animationCount; ++i)
+        {
+            _ani.SetBool($"isIDLE{i}", false);
+        }
+
         Vector2 _horizontalPosition = MoveAmount * Time.deltaTime * _moveX * transform.right;
         Vector2 _verticalPosition = MoveAmount * Time.deltaTime * _moveY * transform.up;
         Vector2 _newPosition = _rigid.position + _horizontalPosition + _verticalPosition;
@@ -117,6 +117,16 @@ public class BearStatusTest : MonoBehaviour
                 _verticalPosition.y = 2.8f;
             }
         }
+    }
+    /// <summary>
+    /// 처음 생성 애니메이션 출력
+    /// </summary>
+    IEnumerator BirthBear()
+    {
+        yield return new WaitForSeconds(3f);
+        _ani.SetTrigger("Move");
+        StartCoroutine(SpawnCoin());
+        StartCoroutine(BearMove());
     }
 
     /// <summary>

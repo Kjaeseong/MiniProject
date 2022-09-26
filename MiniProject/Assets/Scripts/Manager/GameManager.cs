@@ -32,7 +32,7 @@ public class GameManager : SingletonBehaviour<GameManager>
 
     public int GetCoinAmount = 5;
     public int BearPrice = 1000;
-    public int FoodPrice = 100;
+    private int _foodPrice;
 
     public bool IsShowMenu { get; private set; }
 
@@ -40,13 +40,14 @@ public class GameManager : SingletonBehaviour<GameManager>
 
     private void Start()
     {
+        BearCount = 1;
+        _foodPrice = BearCount * 10;
         _spawnPositions = new GameObject[4];
         for (int i = 0; i < 4; ++i)
         {
             _spawnPositions[i] = _positions.transform.GetChild(i).gameObject;
         }
         IsShowMenu = false;
-        BearCount = 1;
     }
 
     private void Update()
@@ -54,7 +55,7 @@ public class GameManager : SingletonBehaviour<GameManager>
         // 추후 빌드 때 삭제해도 될 내용.
         // 테스트용 코드
         _bearPriceUI.text = $"Buy\nBear\n{BearPrice}G";
-        _foodPriceUI.text = $"Buy\nFood\n{FoodPrice}G";
+        _foodPriceUI.text = $"Buy\nFood\n{_foodPrice}G";
     }
 
     /// <summary>
@@ -121,6 +122,7 @@ public class GameManager : SingletonBehaviour<GameManager>
             RemainCoin -= BearPrice;
             _goldUI.text = $"Gold : {RemainCoin}G";
             ++BearCount;
+            _foodPrice = BearCount * 10;
             int num = Random.Range(0, 4);
             GameObject SpawnBear = Instantiate(_bear);
 
@@ -133,13 +135,13 @@ public class GameManager : SingletonBehaviour<GameManager>
     /// </summary>
     public void BuyNewFood()
     {
-        if (RemainCoin - FoodPrice < 0 || _gagueManager._hungryGague == 100)
+        if (RemainCoin - _foodPrice < 0 || _gagueManager._hungryGague == 100)
         {
             return;
         }
         else 
         {
-            RemainCoin -= FoodPrice;
+            RemainCoin -= _foodPrice;
             _goldUI.text = $"Gold : {RemainCoin}G";
             BuyFood.Invoke();
         }
