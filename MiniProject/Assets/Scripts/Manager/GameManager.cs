@@ -66,12 +66,6 @@ public class GameManager : SingletonBehaviour<GameManager>
         _goldUI.text = $"Gold : {RemainCoin}G";
     }
 
-    public void GetIventCoin(int Amount)
-    {
-        RemainCoin += Amount;
-        _goldUI.text = $"Gold : {RemainCoin}G";
-    }
-
     /// <summary>
     /// 타이틀씬으로 돌아가기
     /// </summary>

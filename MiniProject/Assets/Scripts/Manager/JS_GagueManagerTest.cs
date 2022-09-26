@@ -16,7 +16,7 @@ public class JS_GagueManagerTest : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _happyGagueUI;
     [SerializeField] private Image _happyGagueBar;
 
-
+    public JS_BuffManager BuffManager;
     private float DecreaseTime = 10f;
     // 배고픔 수치
     
@@ -76,42 +76,47 @@ public class JS_GagueManagerTest : MonoBehaviour
         GameManager.Instance.BuyFood.RemoveListener(RestoreHungryGague);
     }
 
-    private void FixedUpdate() 
+    private void Update() 
     {
-        GagueIvent();
-        _happyGague++;
+        GagueUpdate();
     }
 
-    private void GagueIvent()
+    private void GagueUpdate()
     {
-        _happyGagueUI.text = _happyGague.ToString();
-        _hungrygagueUI.text = _hungryGague.ToString();
+        _hungrygagueUI.text = $"Hungry : {_hungryGague.ToString()}";
+        _happyGagueUI.text = $"Happy : {_happyGague.ToString()}";
+        _happyGagueBar.fillAmount = (float)_happyGague / 100;
+        
+        
 
         if(_happyGague >= 100)
         {
-            // 인테리어 해방
-            GameManager.Instance.GetIventCoin(500);
-            _happyGague -= 50;
+            BuffManager.EventStep = 4;
+            _happyGagueBar.color = Color.yellow;
         }
         else if(_happyGague >= 90)
         {
             Debug.Log("Green / 피버 이벤트 / 코인 생산시간 절반, 생산코인 * 2 / Dance 모션");
+            BuffManager.EventStep = 3;
+            _happyGagueBar.color = Color.green;
             
         }
         else if(16 <= _happyGague && _happyGague <= 25)
         {
             Debug.Log("Orange / 앵그리곰이벤트 / 코인 생산시간 2배 / Idle모션 랜덤출력");
+            BuffManager.EventStep = 2;
+            _happyGagueBar.color = Color.cyan;
         }
         else if(1 <= _happyGague && _happyGague <= 15)
         {
             Debug.Log("Red / 가출 이벤트, 20초마다 랜덤으로 곰 -1 / Fade Out");
+            BuffManager.EventStep = 1;
+            _happyGagueBar.color = Color.red;
         }
         else if(0 >= _happyGague)
         {
             Debug.Log("Game Over");
         }
-
-
-
     }
+
 }
