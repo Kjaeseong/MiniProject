@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JS_BuffManager : MonoBehaviour
+public class HappyGagueManager : MonoBehaviour
 {
     public int EventStep { get; set; }
-    
+
+    // Start is called before the first frame update
     void Start()
     {
         
@@ -13,11 +14,6 @@ public class JS_BuffManager : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        
-    }
-
-    private void ActivateEvent()
     {
         
     }

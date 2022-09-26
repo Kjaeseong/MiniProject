@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 7717357897842414328}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 1.15, y: 1.15, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7717357897856325859}
@@ -141,21 +141,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37fc5c95592d7af4d8216a2821b8dc4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animations:
-  - {fileID: 7400000, guid: 8de2219bd9304d746b206758dfe32c36, type: 2}
-  - {fileID: 7400000, guid: a3ea6ba28ebea0846ba147fdb2b444ed, type: 2}
-  - {fileID: 7400000, guid: 26389c19bf9f11c48b786c7a2b90cb75, type: 2}
-  - {fileID: 7400000, guid: 6157bece246f09e43986b2ee5d1976c3, type: 2}
-  - {fileID: 7400000, guid: ec647730abfa6af4a89f6d58c3933268, type: 2}
-  - {fileID: 7400000, guid: d708f4358e781bf489e7ef3eefb222dd, type: 2}
-  - {fileID: 7400000, guid: f100368577ca63c4680b6cc208efc215, type: 2}
-  - {fileID: 7400000, guid: 94a5793b71b627241a5f19f6df4dbe4c, type: 2}
-  - {fileID: 7400000, guid: 85148343a4dad524190f0613af3e63be, type: 2}
-  - {fileID: 7400000, guid: 8780388c38389114582f16a607ae8a2d, type: 2}
-  - {fileID: 7400000, guid: e2a403b749f02b6469ac9125521d301a, type: 2}
-  - {fileID: 7400000, guid: 614aaf37cd3548740bcdd651f22c1b50, type: 2}
+  _gague: {fileID: 0}
   MoveDelayTime: 1
   MoveAmount: 3
+  _animationCount: 13
 --- !u!1 &7717357897856325858
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,23 +7,49 @@ public class Coin : MonoBehaviour
     [SerializeField]
     private float rotationSpeed = 120f;
     private Vector2 _touchPosition;
+    private Rigidbody2D _rigid;
+
+    // 테스트 결과 150 권장.
+    [SerializeField] [Range(0, 1000)] private float PushForce;
+    public float StopPosition;
+    private Vector3 FixPosition;
+
+    private void Awake()
+    {
+        _rigid = GetComponent<Rigidbody2D>();
+    }
+
     private void OnEnable()
     {
+        // 코인 활성화 시 코루틴 시작, 중력 On, 위 방향으로 AddForce
         StartCoroutine(Remain());
+
+        _rigid.constraints = RigidbodyConstraints2D.None;
+        _rigid.constraints = RigidbodyConstraints2D.FreezeRotation;
+        _rigid.AddForce(transform.up * PushForce);
+        _rigid.AddForce(transform.right * PushForce / 2);
     }
 
     private void Update()
     {
         Spinning();
+        CollisionWithTheWall();
+
+        // 현재 위치가 활성화시 받아온 y축 좌표와 같아지면 그만 떨어짐
+        if (transform.position.y <= StopPosition)
+        {
+            StopFalling();
+        }
+
         _touchPosition = new Vector2(100f, 100f);
 
-        // PC용 코드
+        // PC 마우스 클릭
         if (Input.GetMouseButton(0))
         {
             _touchPosition = Input.mousePosition;
         }
 
-        // 모바일용 코드
+        // 모바일디바이스 터치
         if (Input.touchCount > 0)
         {
             _touchPosition = Input.GetTouch(0).position;
@@ -40,6 +66,7 @@ public class Coin : MonoBehaviour
             StopCoroutine(Remain());
             hit.collider.gameObject.SetActive(false);
         }
+
     }
 
     /// <summary>
@@ -59,4 +86,24 @@ public class Coin : MonoBehaviour
         transform.rotation = Quaternion.identity;
         gameObject.SetActive(false);
     }
+
+    /// <summary>
+    /// 떨어지는것 멈춤
+    /// </summary>
+    private void StopFalling()
+    {
+        _rigid.constraints = RigidbodyConstraints2D.FreezePosition;
+    }
+
+    /// <summary>
+    /// 동전이 벽에 닿으면 반대 방향으로 튕겨져 나감
+    /// </summary>
+    private void CollisionWithTheWall()
+    {
+        if (transform.position.y > 9.5f)
+        {
+            _rigid.AddForce(transform.right * -1f * PushForce / 4);
+        }
+    }
+
 }

@@ -8,12 +8,12 @@ public class SceneChanger : MonoBehaviour
 
     public void TitleScene()
     {
-        SceneManager.LoadScene("JS_TItleScene");
+        SceneManager.LoadScene("TItleScene");
     }
 
     public void MainScene()
     {
-        SceneManager.LoadScene("ParkDoilScene");
+        SceneManager.LoadScene("MainGameScene");
     }
 
     public void OptionScene()
