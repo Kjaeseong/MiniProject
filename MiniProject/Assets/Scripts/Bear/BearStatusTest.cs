@@ -7,7 +7,7 @@ using UnityEngine.Events;
 public class BearStatusTest : MonoBehaviour
 {
     private GameObject _coinPosition;
-    public GagueManager _gague;
+    public JS_GagueManagerTest _gague;
     private Rigidbody2D _rigid;
     private float _moveX;
     private float _moveY;
@@ -28,7 +28,7 @@ public class BearStatusTest : MonoBehaviour
         _rigid = GetComponent<Rigidbody2D>();
         _coinPosition = transform.GetChild(0).gameObject;
         _ani = GetComponent<Animator>();
-        _gague = GameObject.Find("GagueManager").GetComponent<GagueManager>();
+        _gague = GameObject.Find("GagueManager").GetComponent<JS_GagueManagerTest>();
 
         StartCoroutine(SpawnCoin());
         StartCoroutine(BearMove());

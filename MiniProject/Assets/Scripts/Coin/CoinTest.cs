@@ -12,17 +12,25 @@ public class CoinTest : MonoBehaviour
     // 테스트 결과 150 권장.
     [SerializeField][Range(0, 1000)] private float PushForce;
     public float StopPosition;
+    private Vector3 FixPosition;
+    
+    private int[] _coinDirection = {-1, 1};
 
     private void OnEnable()
     {
         // 코인 활성화 시 코루틴 시작, 중력 On, 위 방향으로 AddForce
         StartCoroutine(Remain());
+
+        Rigid.constraints = RigidbodyConstraints2D.None;
+        Rigid.constraints = RigidbodyConstraints2D.FreezeRotation;
         Rigid.AddForce(transform.up * PushForce);
+        Rigid.AddForce(transform.right * (_coinDirection[Random.Range(0, 2)] * PushForce / 2));
     }
 
     private void Update()
     {
         Spinning();
+        CollisionWithTheWall();
 
         // 현재 위치가 활성화시 받아온 y축 좌표와 같아지면 그만 떨어짐
         if(transform.position.y <= StopPosition)
@@ -81,7 +89,22 @@ public class CoinTest : MonoBehaviour
     /// </summary>
     private void StopFalling()
     {
-        transform.position = new Vector3(transform.position.x, StopPosition, 0f);
+        Rigid.constraints = RigidbodyConstraints2D.FreezeAll;
+    }
+
+    /// <summary>
+    /// 동전이 벽에 닿으면 반대 방향으로 튕겨져 나감
+    /// </summary>
+    private void CollisionWithTheWall()
+    {
+        if(transform.position.x < -5.5f)
+        {
+            Rigid.AddForce(transform.right * (_coinDirection[1] * PushForce / 4));
+        }
+        if(transform.position.y > 9.5f)
+        {
+            Rigid.AddForce(transform.right * (_coinDirection[0] * PushForce / 4));
+        }
     }
     
 }

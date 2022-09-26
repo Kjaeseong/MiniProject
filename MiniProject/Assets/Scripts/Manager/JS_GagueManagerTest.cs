@@ -6,7 +6,10 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
+
 public class JS_GagueManagerTest : MonoBehaviour
+
+
 {
     [SerializeField] // 배고픔 게이지 UI
     private TextMeshProUGUI _hungrygagueUI;
@@ -24,6 +27,7 @@ public class JS_GagueManagerTest : MonoBehaviour
     [Range(0, 100)]public int _hungryGague;
     // 행복게이지 (테스트용 public, 추후 private 수정 예정)
     [Range(0, 100)]public int _happyGague;
+
 
     public int RestoreAmount = 1;
 
@@ -76,6 +80,7 @@ public class JS_GagueManagerTest : MonoBehaviour
         GameManager.Instance.BuyFood.RemoveListener(RestoreHungryGague);
     }
 
+
     private void Update() 
     {
         GagueUpdate();
@@ -83,12 +88,9 @@ public class JS_GagueManagerTest : MonoBehaviour
 
     private void GagueUpdate()
     {
-        _hungrygagueUI.text = $"Hungry : {_hungryGague.ToString()}";
-        _happyGagueUI.text = $"Happy : {_happyGague.ToString()}";
+        _happyGagueUI.text = $"Happy : {_happyGague}";
         _happyGagueBar.fillAmount = (float)_happyGague / 100;
         
-        
-
         if(_happyGague >= 100)
         {
             BuffManager.EventStep = 4;
@@ -118,5 +120,6 @@ public class JS_GagueManagerTest : MonoBehaviour
             Debug.Log("Game Over");
         }
     }
+
 
 }
