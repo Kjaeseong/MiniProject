@@ -7,7 +7,7 @@ public class CoinTest : MonoBehaviour
     [SerializeField]
     private float rotationSpeed = 120f;
     private Vector2 _touchPosition;
-    public Rigidbody2D Rigid;
+    private Rigidbody2D _rigid;
 
     // 테스트 결과 150 권장.
     [SerializeField][Range(0, 1000)] private float PushForce;
@@ -15,9 +15,15 @@ public class CoinTest : MonoBehaviour
 
     private void OnEnable()
     {
-        // 코인 활성화 시 코루틴 시작, 중력 On, 위 방향으로 AddForce
+        // 코인 활성화 시 코루틴 시작
         StartCoroutine(Remain());
-        Rigid.AddForce(transform.up * PushForce);
+    }
+
+    private void Start()
+    {
+        //중력 On, 위 방향으로 AddForce
+        _rigid = GetComponent<Rigidbody2D>();
+        _rigid.AddForce(transform.up * PushForce);
     }
 
     private void Update()
