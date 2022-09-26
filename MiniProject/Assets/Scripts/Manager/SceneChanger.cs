@@ -5,12 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class SceneChanger : MonoBehaviour
 {
-    public GameObject _optionWindow;
-    public GameObject _titleWindow;
+    public GameObject OptionWindow;
+    public GameObject TitleWindow;
+    public GameObject CreditWindow;
 
     private void Start() 
     {
-        _optionWindow.SetActive(false);
+        OptionWindow.SetActive(false);
     }
 
     public void TitleScene()
@@ -25,12 +26,13 @@ public class SceneChanger : MonoBehaviour
 
     public void OptionScene()
     {
-        _optionWindow.SetActive(true);
-        _titleWindow.SetActive(false);
+        OptionWindow.SetActive(true);
+        TitleWindow.SetActive(false);
     }
 
     public void CreditScene()
     {
-        SceneManager.LoadScene("CreditScene");
+        CreditWindow.SetActive(true);
+        TitleWindow.SetActive(false);
     }
 }
