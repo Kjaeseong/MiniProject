@@ -130,8 +130,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8fac5050dfcc4fa4dbae06b0fdc3d64a
-      internalID: 787464115
+      spriteID: 3bad505182ba58a4a979eee45341049b
+      internalID: -2029180640
       vertices: []
       indices: 
       edges: []
@@ -151,8 +151,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7ba3d2589275bde48970cdb10ec79a79
-      internalID: -1049750118
+      spriteID: c98b7724555454f44b9a6d5a6c7d77ef
+      internalID: 2111120219
       vertices: []
       indices: 
       edges: []
@@ -172,8 +172,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c8505d75fcfcc644890702b64c46b909
-      internalID: -304401497
+      spriteID: e7114d2cb3ba3e5429612af513673488
+      internalID: 266307614
       vertices: []
       indices: 
       edges: []
@@ -193,8 +193,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 77eae0655087bf642bad9a8bb0089030
-      internalID: -1099510593
+      spriteID: c5fde8560aa923042b4b678948d5238b
+      internalID: 321533394
       vertices: []
       indices: 
       edges: []
@@ -214,8 +214,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b42c71fdcd56ee346839a72bb9c587ec
-      internalID: -826711898
+      spriteID: 8f2ebc1dacc030f4c856893e0d43b645
+      internalID: 1935248830
       vertices: []
       indices: 
       edges: []
@@ -235,8 +235,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bca8c75d91dcd234286739b5c0029dd5
-      internalID: -1750018912
+      spriteID: 46cb506b384518d4ca0b5ac0618c48ca
+      internalID: -1410054579
       vertices: []
       indices: 
       edges: []
@@ -252,12 +252,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      spritesheet (9)_3: -1099510593
-      spritesheet (9)_4: -826711898
-      spritesheet (9)_1: -1049750118
-      spritesheet (9)_2: -304401497
-      spritesheet (9)_0: 787464115
-      spritesheet (9)_5: -1750018912
+      spritesheet (9)_3: 321533394
+      spritesheet (9)_4: 1935248830
+      spritesheet (9)_1: 2111120219
+      spritesheet (9)_2: 266307614
+      spritesheet (9)_0: -2029180640
+      spritesheet (9)_5: -1410054579
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

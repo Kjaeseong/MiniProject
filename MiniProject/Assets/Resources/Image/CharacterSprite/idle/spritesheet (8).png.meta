@@ -130,8 +130,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2e10c7e59b4588a489282d9c79f93c59
-      internalID: -62845468
+      spriteID: 9f571065c959b3a43998fb20747e9a70
+      internalID: 1412681913
       vertices: []
       indices: 
       edges: []
@@ -151,8 +151,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f12d60e116e7cfe48a6f356886b5d65a
-      internalID: -2066105710
+      spriteID: 094a6684aaaa92b4eab694d071b0ea1d
+      internalID: -1387923077
       vertices: []
       indices: 
       edges: []
@@ -172,8 +172,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fad09fbe4441db24e925567f727648a3
-      internalID: 745595398
+      spriteID: 464e82e4b73ae504e8f5e1017915bc2e
+      internalID: -1497798946
       vertices: []
       indices: 
       edges: []
@@ -193,8 +193,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 68c548d5150372f479f8faffd4b21b20
-      internalID: 496395129
+      spriteID: a2fe736055b6dee4d8f7ae3833edb31f
+      internalID: 1308746621
       vertices: []
       indices: 
       edges: []
@@ -214,8 +214,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 885c01db34ad3e5478eebad8c60288e1
-      internalID: -1623362332
+      spriteID: 4143dcae33d02d94b8cb3498079697a4
+      internalID: 1966857648
       vertices: []
       indices: 
       edges: []
@@ -235,8 +235,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5c40b2de261d512488b39d359afe039e
-      internalID: -565706902
+      spriteID: 256e34d195e29f94cbc4d55cf8724958
+      internalID: 50649824
       vertices: []
       indices: 
       edges: []
@@ -252,12 +252,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      spritesheet (8)_5: -565706902
-      spritesheet (8)_2: 745595398
-      spritesheet (8)_4: -1623362332
-      spritesheet (8)_0: -62845468
-      spritesheet (8)_1: -2066105710
-      spritesheet (8)_3: 496395129
+      spritesheet (8)_5: 50649824
+      spritesheet (8)_2: -1497798946
+      spritesheet (8)_4: 1966857648
+      spritesheet (8)_0: 1412681913
+      spritesheet (8)_1: -1387923077
+      spritesheet (8)_3: 1308746621
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
