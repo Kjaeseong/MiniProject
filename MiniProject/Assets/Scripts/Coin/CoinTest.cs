@@ -89,7 +89,7 @@ public class CoinTest : MonoBehaviour
     /// </summary>
     private void StopFalling()
     {
-        Rigid.constraints = RigidbodyConstraints2D.FreezeAll;
+        Rigid.constraints = RigidbodyConstraints2D.FreezePosition;
     }
 
     /// <summary>
