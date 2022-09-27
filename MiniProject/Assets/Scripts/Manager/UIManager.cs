@@ -14,6 +14,11 @@ public class UIManager : SingletonBehaviour<UIManager>
     private GameObject _clearUI;
     [SerializeField]
     private GameObject _gameoverUI;
+    [SerializeField]
+    private GameObject _popUpUI;
+    private PopUpUI _popUpUiScript;
+    [SerializeField]
+    private SoundManager _sound;
 
     [SerializeField]
     private Button _pauseButton;
@@ -33,15 +38,19 @@ public class UIManager : SingletonBehaviour<UIManager>
         IsInterective = true;
     }
     /// <summary>
-    /// FeverUI°ü·Ã ÇÔ¼ö
+    /// FeverUIê´€ë ¨ í•¨ìˆ˜
     /// </summary>
     public void AboutFeverUI()
     {
         ShowFeverUI = !ShowFeverUI;
         _feverUI.SetActive(ShowFeverUI);
+
+        //ì¶”ê°€ ì½”ë“œ
+        _sound.BgmPlay(2);
     }
+
     /// <summary>
-    /// ¸Ş´º ´İ±â
+    /// ë©”ë‰´ ë‹«ê¸°
     // </summary>
     public void Menu()
     {
@@ -49,6 +58,7 @@ public class UIManager : SingletonBehaviour<UIManager>
         if (ShowPauseMenuUI == true)
         {
             Time.timeScale = 0f;
+            _sound.ClickPlay(1);
         }
         else
         {
@@ -58,25 +68,27 @@ public class UIManager : SingletonBehaviour<UIManager>
     }
 
     /// <summary>
-    /// °ÔÀÓ Å¬¸®¾î UI Ãâ·Â
+    /// ê²Œì„ í´ë¦¬ì–´ UI ì¶œë ¥
     /// </summary>
     public void GameClearUI()
     {
         Time.timeScale = 0f;
         _clearUI.SetActive(true);
+        _sound.BgmPlay(4);
     }
 
     /// <summary>
-    /// °ÔÀÓ¿À¹ö UI Ãâ·Â
+    /// ê²Œì„ì˜¤ë²„ UI ì¶œë ¥
     /// </summary>
     public void GameOverUI()
     {
         Time.timeScale = 0f;
         _gameoverUI.SetActive(true);
+        _sound.BgmPlay(3);
     }
 
     /// <summary>
-    /// Å¸ÀÌÆ²È­¸éÀ¸·Î µ¹¾Æ°¡±â
+    /// íƒ€ì´í‹€í™”ë©´ìœ¼ë¡œ ëŒì•„ê°€ê¸°
     /// </summary>
     public void GoToTitleScene()
     {
@@ -86,11 +98,27 @@ public class UIManager : SingletonBehaviour<UIManager>
         SceneManager.LoadScene(0);
     }
 
+    /// <summary>
+    /// íŒì—…ì°½ UI í˜¸ì¶œ. ë§¤ê°œë³€ìˆ˜ë¡œ ì´ë²¤íŠ¸ëª… ì…ë ¥(CSVíŒŒì¼ ì°¸ê³ )
+    /// </summary>
+    public void PopUpUI(string description)
+    {
+        if(_popUpUiScript != null)
+        {
+            _popUpUiScript = _popUpUI.GetComponent<PopUpUI>();
+        }
+
+        Time.timeScale = 0f;
+        _popUpUI.SetActive(true);
+        _popUpUiScript.PopUpText(description);
+        _sound.SePlay(2);
+
     public void ChangeInterection()
     {
         IsInterective = !IsInterective;
         _pauseButton.interactable = IsInterective;
         _buyBearButton.interactable = IsInterective;
         _buyFoodButton.interactable = IsInterective;
+
     }
 }

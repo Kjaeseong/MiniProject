@@ -10,6 +10,10 @@ public class BearGroup : MonoBehaviour
     private GameObject[] _bearPool;
     private int _bearNum;
 
+    
+    [SerializeField]
+    private SoundManager _sound;
+
 
     void Start()
     {
@@ -18,6 +22,8 @@ public class BearGroup : MonoBehaviour
         
         Vector3 StartPosition = new Vector3(0f, 0f, 0f);
         BirthBear(StartPosition);
+
+        _sound.BgmPlay(1);
     }
 
     private void CreateBearPool(int Size)
@@ -41,6 +47,7 @@ public class BearGroup : MonoBehaviour
             {
                 _bearPool[i].transform.position = SpawnPosition;
                 _bearPool[i].SetActive(true);
+                _sound.SePlay(0);
                 break;
             }
         }
@@ -55,6 +62,7 @@ public class BearGroup : MonoBehaviour
             if(_bearPool[i].activeSelf == false && _bearPool.Length > 0)
             {
                 _bearPool[i - 1].SetActive(false);
+                _sound.SePlay(3);
             }
         }
         --_bearNum;
