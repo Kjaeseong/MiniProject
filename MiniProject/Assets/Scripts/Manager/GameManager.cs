@@ -32,6 +32,7 @@ public class GameManager : SingletonBehaviour<GameManager>
     public int RemainCoin { get; private set; }
 
     public int GetCoinAmount = 5;
+    public int StandardCoinAmount = 100;
     public int BearPrice = 1000;
     private int _foodPrice;
 

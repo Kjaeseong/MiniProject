@@ -16,6 +16,7 @@ public class BearStatus : MonoBehaviour
     private int _index;
     private Animator _ani;
     private float _spawnCoinTime = 10f;
+    private float _standardSpawnCoin = 10f;
 
     public float MoveDelayTime = 1f;
     public float MoveAmount = 0.1f;
@@ -23,9 +24,12 @@ public class BearStatus : MonoBehaviour
     [SerializeField]
     private int _animationCount = 13;
 
+    private bool _finishBirth;
+
 
     private void Start()
     {
+        _finishBirth = false;
         _playCount = 0;
         _index = Random.Range(1, 14);
         _rigid = GetComponent<Rigidbody2D>();
@@ -41,7 +45,7 @@ public class BearStatus : MonoBehaviour
     {
         GameManager.Instance.StopCoin.AddListener(StopCoinSpawn);
         GameManager.Instance.RestartCoin.AddListener(RestartCoinSpawn);
-        GameManager.Instance.EventTime.AddListener(ChangeStatus);
+        GameManager.Instance.EventTime.AddListener(FeverTime);
     }
 
     /// <summary>
@@ -62,37 +66,40 @@ public class BearStatus : MonoBehaviour
 
     private void Update()
     {
-        // 행복게이지로 인한 이벤트 타임이면 이벤트 타임이 최우선 적용
-        if (GameManager.Instance.IsEventTime == false)
-        {
-            // 2초 움직이고 4초 IDLE
-            _elapsedTime += Time.deltaTime;
-            if (_elapsedTime < 2f)
+        if(_finishBirth == true)
+        { // 행복게이지로 인한 이벤트 타임이면 이벤트 타임이 최우선 적용
+            if (GameManager.Instance.IsEventTime == false)
             {
-                MoveBear();
-            }
-            else if (_elapsedTime > 2f && _elapsedTime < 6f)
-            {
-                if (false == _ani.GetBool($"isIDLE{_index}"))
+                // 2초 움직이고 4초 IDLE
+                _elapsedTime += Time.deltaTime;
+                if (_elapsedTime < 2f)
                 {
-                    _ani.SetBool($"isIDLE{_index}", true);
+                    MoveBear();
+                }
+                else if (_elapsedTime > 2f && _elapsedTime < 6f)
+                {
+                    if (false == _ani.GetBool($"isIDLE{_index}"))
+                    {
+                        _ani.SetBool($"isIDLE{_index}", true);
+                    }
+                    _ani.SetBool("canMove", false);
+                }
+                if (_elapsedTime >= 6f)
+                {
+                    _elapsedTime = 0.0f;
+                }
+
+                if (_playCount > 15)
+                {
+                    _playCount = 0;
+                    _index = Random.Range(1, 14);
                 }
             }
-            if (_elapsedTime >= 6f)
-            {
-                _elapsedTime = 0.0f;
-            }
 
-            if (_playCount > 15)
+            else
             {
-                _playCount = 0;
-                _index = Random.Range(1, 14);
+                return;
             }
-        }
-
-        else
-        {
-            return;
         }
     }
 
@@ -101,7 +108,8 @@ public class BearStatus : MonoBehaviour
     /// </summary>
     private void MoveBear()
     {
-        _ani.SetTrigger("Move");
+        _ani.SetBool("canMove", true);
+
         for (int i = 1; i <= _animationCount; ++i)
         {
             _ani.SetBool($"isIDLE{i}", false);
@@ -135,15 +143,33 @@ public class BearStatus : MonoBehaviour
             }
         }
     }
+
+    /// <summary>
+    /// 이벤트 타임
+    /// </summary>
+    private void FeverTime()
+    {
+        int _index = Random.Range(1, 6);
+        _ani.SetBool("canMove", false);
+        _ani.Play($"Bear_Dance0{_index}");
+        _spawnCoinTime = _standardSpawnCoin / 2;
+        Invoke("EndFeverTime", 30f);
+    }
+    private void EndFeverTime()
+    {
+        _ani.SetBool("canMove", false);
+    }
+
     /// <summary>
     /// 처음 생성 애니메이션 출력
     /// </summary>
     IEnumerator BirthBear()
     {
         yield return new WaitForSeconds(3f);
-        _ani.SetTrigger("Move");
+        _ani.SetBool("canMove", true);
         StartCoroutine(SpawnCoin());
         StartCoroutine(BearMove());
+        _finishBirth = true;
     }
 
     /// <summary>
