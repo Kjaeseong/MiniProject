@@ -7,20 +7,19 @@ public class SoundManager : MonoBehaviour
     [Range(0, 1)]public float BgmVolume = 0.5f;
     [Range(0, 1)]public float SeVolume = 0.5f;
 
-    private AudioSource Bgm;
-    private AudioSource Se;
-    private AudioSource Click;
+    [Space(9)]
+    public AudioSource Bgm;
     public List<AudioClip> BgmList = new List<AudioClip>();
+    [Space(9)]
+    public AudioSource Se;
     public List<AudioClip> SeList = new List<AudioClip>();
+    [Space(9)]
+    public AudioSource Click;
     public List<AudioClip> ClickList = new List<AudioClip>();
 
 
     private void Start() 
     {
-        DontDestroyOnLoad(gameObject);
-        Bgm = GameObject.Find("BGM").GetComponent<AudioSource>();
-        Se = GameObject.Find("SE").GetComponent<AudioSource>();
-        Click = GameObject.Find("CLICK").GetComponent<AudioSource>();
         BgmPlay(0);
     }
 
@@ -62,7 +61,6 @@ public class SoundManager : MonoBehaviour
             Click.clip = ClickList[AudioTrack];
             Click.Play();
         }
-
     }
     public void ClickStop()
     {
