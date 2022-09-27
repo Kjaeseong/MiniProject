@@ -1150,7 +1150,7 @@ GameObject:
   - component: {fileID: 718602451}
   - component: {fileID: 718602450}
   m_Layer: 5
-  m_Name: Button
+  m_Name: PauseButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1654,6 +1654,9 @@ MonoBehaviour:
   _menuUI: {fileID: 629237957}
   _clearUI: {fileID: 1318719424}
   _gameoverUI: {fileID: 859851567}
+  _pauseButton: {fileID: 718602450}
+  _buyBearButton: {fileID: 1367388916}
+  _buyFoodButton: {fileID: 1862261596}
 --- !u!1 &970119018
 GameObject:
   m_ObjectHideFlags: 0
