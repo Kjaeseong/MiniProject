@@ -112,6 +112,7 @@ public class UIManager : SingletonBehaviour<UIManager>
         _popUpUI.SetActive(true);
         _popUpUiScript.PopUpText(description);
         _sound.SePlay(2);
+    }
 
     public void ChangeInterection()
     {
