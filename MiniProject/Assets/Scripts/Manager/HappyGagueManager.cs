@@ -25,7 +25,8 @@ public class HappyGagueManager : MonoBehaviour
     private bool _deleteBear;
     private int _backGroundIndex;
 
-    public BearGroup BearGroup;
+    [SerializeField]
+    private BearGroup BearGroup;
 
     private void Awake()
     {
@@ -52,7 +53,7 @@ public class HappyGagueManager : MonoBehaviour
                 break;
 
             case (int)State.FEVER_TIME:
-                if(_finishFeverTime == true)
+                if (_finishFeverTime == true)
                 {
                     StartCoroutine(FeverTime());
                 }
@@ -74,7 +75,7 @@ public class HappyGagueManager : MonoBehaviour
         }
 
     }
-    private void FinishFeverTime()
+    private void CooltimeFeverTime()
     {
         _finishFeverTime = true;
     }
@@ -90,14 +91,16 @@ public class HappyGagueManager : MonoBehaviour
     {
         _finishFeverTime = false;
         UIManager.Instance.AboutFeverUI();
+        UIManager.Instance.ChangeInterection();
         GameManager.Instance.ChangeStatus();
         GameManager.Instance.StartEventTime();
         GameManager.Instance.GetCoinAmount = GameManager.Instance.StandardCoinAmount * 2;
         yield return new WaitForSeconds(30f);
 
         UIManager.Instance.AboutFeverUI();
+        UIManager.Instance.ChangeInterection();
         GameManager.Instance.ChangeStatus();
         GameManager.Instance.GetCoinAmount = GameManager.Instance.StandardCoinAmount;
-        Invoke("FinishFeverTime", 20f);
+        Invoke("CooltimeFeverTime", 30f);
     }
 }

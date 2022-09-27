@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class UIManager : SingletonBehaviour<UIManager>
 {
@@ -19,28 +20,37 @@ public class UIManager : SingletonBehaviour<UIManager>
     [SerializeField]
     private SoundManager _sound;
 
+    [SerializeField]
+    private Button _pauseButton;
+    [SerializeField]
+    private Button _buyBearButton;
+    [SerializeField]
+    private Button _buyFoodButton;
+
     public bool ShowFeverUI { get; private set; }
     public bool ShowPauseMenuUI { get; private set; }
+    public bool IsInterective { get; private set; }
 
     private void Start()
     {
         ShowFeverUI = false;
         ShowPauseMenuUI = false;
+        IsInterective = true;
     }
     /// <summary>
-    /// FeverUI°ü·Ã ÇÔ¼ö
+    /// FeverUIê´€ë ¨ í•¨ìˆ˜
     /// </summary>
     public void AboutFeverUI()
     {
         ShowFeverUI = !ShowFeverUI;
         _feverUI.SetActive(ShowFeverUI);
 
-        //Ãß°¡ ÄÚµå
+        //ì¶”ê°€ ì½”ë“œ
         _sound.BgmPlay(2);
     }
 
     /// <summary>
-    /// ¸Ş´º ´İ±â
+    /// ë©”ë‰´ ë‹«ê¸°
     // </summary>
     public void Menu()
     {
@@ -58,7 +68,7 @@ public class UIManager : SingletonBehaviour<UIManager>
     }
 
     /// <summary>
-    /// °ÔÀÓ Å¬¸®¾î UI Ãâ·Â
+    /// ê²Œì„ í´ë¦¬ì–´ UI ì¶œë ¥
     /// </summary>
     public void GameClearUI()
     {
@@ -68,7 +78,7 @@ public class UIManager : SingletonBehaviour<UIManager>
     }
 
     /// <summary>
-    /// °ÔÀÓ¿À¹ö UI Ãâ·Â
+    /// ê²Œì„ì˜¤ë²„ UI ì¶œë ¥
     /// </summary>
     public void GameOverUI()
     {
@@ -78,7 +88,7 @@ public class UIManager : SingletonBehaviour<UIManager>
     }
 
     /// <summary>
-    /// Å¸ÀÌÆ²È­¸éÀ¸·Î µ¹¾Æ°¡±â
+    /// íƒ€ì´í‹€í™”ë©´ìœ¼ë¡œ ëŒì•„ê°€ê¸°
     /// </summary>
     public void GoToTitleScene()
     {
@@ -89,7 +99,7 @@ public class UIManager : SingletonBehaviour<UIManager>
     }
 
     /// <summary>
-    /// ÆË¾÷Ã¢ UI È£Ãâ. ¸Å°³º¯¼ö·Î ÀÌº¥Æ®¸í ÀÔ·Â(CSVÆÄÀÏ Âü°í)
+    /// íŒì—…ì°½ UI í˜¸ì¶œ. ë§¤ê°œë³€ìˆ˜ë¡œ ì´ë²¤íŠ¸ëª… ì…ë ¥(CSVíŒŒì¼ ì°¸ê³ )
     /// </summary>
     public void PopUpUI(string description)
     {
@@ -102,5 +112,13 @@ public class UIManager : SingletonBehaviour<UIManager>
         _popUpUI.SetActive(true);
         _popUpUiScript.PopUpText(description);
         _sound.SePlay(2);
+
+    public void ChangeInterection()
+    {
+        IsInterective = !IsInterective;
+        _pauseButton.interactable = IsInterective;
+        _buyBearButton.interactable = IsInterective;
+        _buyFoodButton.interactable = IsInterective;
+
     }
 }
