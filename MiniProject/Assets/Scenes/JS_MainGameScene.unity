@@ -3127,6 +3127,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: PopUpUI
       objectReference: {fileID: 0}
+    - target: {fileID: 4330519641721288590, guid: 079e74389216ec84290fa9e79ee22238, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4330519642454906519, guid: 079e74389216ec84290fa9e79ee22238, type: 3}
+      propertyPath: m_fontSize
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 4330519642454906519, guid: 079e74389216ec84290fa9e79ee22238, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: c6525aeccaad28c41b487db08c99d1f3, type: 2}
+    - target: {fileID: 4330519642454906519, guid: 079e74389216ec84290fa9e79ee22238, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 4330519642454906519, guid: 079e74389216ec84290fa9e79ee22238, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 3567714582597089658, guid: c6525aeccaad28c41b487db08c99d1f3, type: 2}
+    - target: {fileID: 4330519642454906519, guid: 079e74389216ec84290fa9e79ee22238, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 079e74389216ec84290fa9e79ee22238, type: 3}
 --- !u!1001 &5426187703037763937
