@@ -34,6 +34,13 @@ public class GagueManager : MonoBehaviour
         GameManager.Instance.BuyFood.AddListener(RestoreHungryGague);
     }
 
+    private void Start()
+    {
+        _hungryGague = 100;
+        Invoke("StartReduce",3f);
+        Invoke("CheckGague", 3f);
+    }
+
     /// <summary>
     /// 먹이 살때 배고픔 게이지 회복시키는 함수
     /// </summary>
@@ -48,42 +55,25 @@ public class GagueManager : MonoBehaviour
         _gagueBar.fillAmount = (float)_hungryGague / 100;
     }
 
-    private void Start()
+    /// <summary>
+    /// 3초뒤에 배고픔 게이지 감소 시작
+    /// </summary>
+    private void StartReduce()
     {
-        _hungryGague = 100;
         StartCoroutine(HungryGague());
     }
 
-    /// <summary>
-    /// 10초마다 배고픔 게이지 감소(곰 개수 X 1)
-    /// </summary>
-    IEnumerator HungryGague()
+    private void CheckGague()
     {
-        while (true)
-        {
-            yield return new WaitForSeconds(DecreaseTime);
-            _hungryGague -= GameManager.Instance.BearCount;
-            if (_hungryGague <= 0) // 음수 떨어지는거 방지
-            {
-                _hungryGague = 0;
-                GameManager.Instance.StopSpawnCoin();
-            }
-            //_hungrygagueUI.text = $"Hungry : {_hungryGague}";
-            _gagueBar.fillAmount = (float)_hungryGague / 100;
-        }
+        StartCoroutine(CheckHungryGague());
     }
-
-    private void OnDisable()
-    {
-        GameManager.Instance.BuyFood.RemoveListener(RestoreHungryGague);
-    }
-
 
     private void Update()
     {
         GagueUpdate();
 
         _hungrygagueUI.text = $"Hungry : {_hungryGague}";
+        _gagueBar.fillAmount = (float)_hungryGague / 100;
     }
 
     private void GagueUpdate()
@@ -96,7 +86,7 @@ public class GagueManager : MonoBehaviour
             HappyGaugeManagement.EventStep = 4;
             _happyGagueBar.color = Color.yellow;
         }
-        else if (_happyGague >= 90)
+        else if (_happyGague >= 90 && _happyGague < 100)
         {
             Debug.Log("Green / 피버 이벤트 / 코인 생산시간 절반, 생산코인 * 2 / Dance 모션");
             HappyGaugeManagement.EventStep = 3;
@@ -121,5 +111,44 @@ public class GagueManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 10초마다 배고픔 게이지 감소(곰 개수 X 1)
+    /// </summary>
+    IEnumerator HungryGague()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(DecreaseTime);
+            _hungryGague -= GameManager.Instance.BearCount;
+            if (_hungryGague <= 0) // 음수 떨어지는거 방지
+            {
+                _hungryGague = 0;
+                GameManager.Instance.StopSpawnCoin();
+            }
+            //_hungrygagueUI.text = $"Hungry : {_hungryGague}";
+            _gagueBar.fillAmount = (float)_hungryGague / 100;
+        }
+    }
+
+    IEnumerator CheckHungryGague()
+    {
+        while(true)
+        {
+            yield return new WaitForSeconds(10f);
+            if (_hungryGague >= 90)
+            {
+                _happyGague += 10;
+            }
+            else if (_hungryGague <= 25)
+            {
+                _happyGague -= 10;
+            }
+        }
+    }
+
+    private void OnDisable()
+    {
+        GameManager.Instance.BuyFood.RemoveListener(RestoreHungryGague);
+    }
 
 }

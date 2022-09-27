@@ -10,6 +10,7 @@ public class GameManager : SingletonBehaviour<GameManager>
     public UnityEvent BuyFood = new UnityEvent();
     public UnityEvent StopCoin = new UnityEvent();
     public UnityEvent RestartCoin = new UnityEvent();
+    public UnityEvent EventTime = new UnityEvent();
 
     [SerializeField] //곰 오브젝트
     private GameObject _bear;
@@ -147,4 +148,11 @@ public class GameManager : SingletonBehaviour<GameManager>
         }
     }
 
+    /// <summary>
+    /// 이벤트 타임때 호출될 옵저버패턴
+    /// </summary>
+    public void StartEventTime()
+    {
+        EventTime.Invoke();
+    }
 }

@@ -15,6 +15,7 @@ public class BearStatus : MonoBehaviour
     private int _playCount;
     private int _index;
     private Animator _ani;
+    private float _spawnCoinTime = 10f;
 
     public float MoveDelayTime = 1f;
     public float MoveAmount = 0.1f;
@@ -22,8 +23,11 @@ public class BearStatus : MonoBehaviour
     [SerializeField]
     private int _animationCount = 13;
 
+    public bool IsEventTime { get; private set; }
+
     private void Start()
     {
+        IsEventTime = false;
         _playCount = 0;
         _index = Random.Range(1, 14);
         _rigid = GetComponent<Rigidbody2D>();
@@ -39,13 +43,28 @@ public class BearStatus : MonoBehaviour
     {
         GameManager.Instance.StopCoin.AddListener(StopCoinSpawn);
         GameManager.Instance.RestartCoin.AddListener(RestartCoinSpawn);
+        GameManager.Instance.EventTime.AddListener(ChangeStatus);
     }
 
+    /// <summary>
+    /// 이벤트 타임 상태 변경
+    /// </summary>
+    private void ChangeStatus()
+    {
+        IsEventTime = !IsEventTime;
+    }
+
+    /// <summary>
+    /// 코인 재생성 시작
+    /// </summary>
     private void RestartCoinSpawn()
     {
         StartCoroutine(SpawnCoin());
     }
 
+    /// <summary>
+    /// 코인 생성 정지
+    /// </summary>
     private void StopCoinSpawn()
     {
         StopCoroutine(SpawnCoin());
@@ -53,30 +72,38 @@ public class BearStatus : MonoBehaviour
 
     private void Update()
     {
-        // 2초 움직이고 4초 IDLE
-        _elapsedTime += Time.deltaTime;
-        if (_elapsedTime < 2f)
+        // 행복게이지로 인한 이벤트 타임이면 이벤트 타임이 최우선 적용
+        if (IsEventTime == false)
         {
-            MoveBear();
-        }
-        else if (_elapsedTime > 2f && _elapsedTime < 6f)
-        {
-            if (false == _ani.GetBool($"isIDLE{_index}"))
+            // 2초 움직이고 4초 IDLE
+            _elapsedTime += Time.deltaTime;
+            if (_elapsedTime < 2f)
             {
-                _ani.SetBool($"isIDLE{_index}", true);
+                MoveBear();
+            }
+            else if (_elapsedTime > 2f && _elapsedTime < 6f)
+            {
+                if (false == _ani.GetBool($"isIDLE{_index}"))
+                {
+                    _ani.SetBool($"isIDLE{_index}", true);
+                }
+            }
+            if (_elapsedTime >= 6f)
+            {
+                _elapsedTime = 0.0f;
+            }
+
+            if (_playCount > 15)
+            {
+                _playCount = 0;
+                _index = Random.Range(1, 14);
             }
         }
-        if (_elapsedTime >= 6f)
-        {
-            _elapsedTime = 0.0f;
-        }
 
-        if (_playCount > 15)
+        else
         {
-            _playCount = 0;
-            _index = Random.Range(1, 14);
+            return;
         }
-
     }
 
     /// <summary>
@@ -136,7 +163,7 @@ public class BearStatus : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(10f);
+            yield return new WaitForSeconds(_spawnCoinTime);
             for (int i = 0; i < 100; ++i)
             {
                 if (false == SpawnManager.Instance.CoinGroup[i].activeSelf)
@@ -151,7 +178,7 @@ public class BearStatus : MonoBehaviour
                         // 코인 오브젝트 활성화 시 Bear Y축 좌표 전달
                         Coin coinScript;
                         coinScript = SpawnManager.Instance.CoinGroup[i].GetComponent<Coin>();
-                        coinScript.StopPosition = transform.position.y - 1;
+                        coinScript.StopPosition = transform.position.y - 0.3f;
                     }
                     break;
                 }
