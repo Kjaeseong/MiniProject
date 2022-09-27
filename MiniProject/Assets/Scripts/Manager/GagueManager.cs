@@ -81,28 +81,30 @@ public class GagueManager : MonoBehaviour
         _happyGagueUI.text = $"Happy : {_happyGague}";
         _happyGagueBar.fillAmount = (float)_happyGague / 100;
 
+        HappyGaugeManagement.EventStep = (int)HappyGagueManager.State.DEFAULT;
+
         if (_happyGague >= 100)
         {
-            HappyGaugeManagement.EventStep = 4;
+            HappyGaugeManagement.EventStep = (int)HappyGagueManager.State.CHANGE_BACKGROUND;
             _happyGagueBar.color = Color.yellow;
         }
         else if (_happyGague >= 90 && _happyGague < 100)
         {
             Debug.Log("Green / 피버 이벤트 / 코인 생산시간 절반, 생산코인 * 2 / Dance 모션");
-            HappyGaugeManagement.EventStep = 3;
+            HappyGaugeManagement.EventStep = (int)HappyGagueManager.State.FEVER_TIME;
             _happyGagueBar.color = Color.green;
 
         }
         else if (16 <= _happyGague && _happyGague <= 25)
         {
             Debug.Log("Orange / 앵그리곰이벤트 / 코인 생산시간 2배 / Idle모션 랜덤출력");
-            HappyGaugeManagement.EventStep = 2;
+            HappyGaugeManagement.EventStep = (int)HappyGagueManager.State.ANGRY_BEAR;
             _happyGagueBar.color = Color.cyan;
         }
         else if (1 <= _happyGague && _happyGague <= 15)
         {
             Debug.Log("Red / 가출 이벤트, 20초마다 랜덤으로 곰 -1 / Fade Out");
-            HappyGaugeManagement.EventStep = 1;
+            HappyGaugeManagement.EventStep = (int)HappyGagueManager.State.BEAR_BYE;
             _happyGagueBar.color = Color.red;
         }
         else if (0 >= _happyGague)
@@ -119,14 +121,18 @@ public class GagueManager : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(DecreaseTime);
-            _hungryGague -= GameManager.Instance.BearCount;
-            if (_hungryGague <= 0) // 음수 떨어지는거 방지
+            // 이벤트 타임 아닐때 감소
+            if (GameManager.Instance.IsEventTime == false)
             {
-                _hungryGague = 0;
-                GameManager.Instance.StopSpawnCoin();
+                _hungryGague -= GameManager.Instance.BearCount;
+                if (_hungryGague <= 0) // 음수 떨어지는거 방지
+                {
+                    _hungryGague = 0;
+                    GameManager.Instance.StopSpawnCoin();
+                }
+                _hungrygagueUI.text = $"Hungry : {_hungryGague}";
+                _gagueBar.fillAmount = (float)_hungryGague / 100;
             }
-            //_hungrygagueUI.text = $"Hungry : {_hungryGague}";
-            _gagueBar.fillAmount = (float)_hungryGague / 100;
         }
     }
 
@@ -135,13 +141,17 @@ public class GagueManager : MonoBehaviour
         while(true)
         {
             yield return new WaitForSeconds(10f);
-            if (_hungryGague >= 90)
+            // 이벤트 타임 아닐때 감소
+            if (GameManager.Instance.IsEventTime == false)
             {
-                _happyGague += 10;
-            }
-            else if (_hungryGague <= 25)
-            {
-                _happyGague -= 10;
+                if (_hungryGague >= 90)
+                {
+                    _happyGague += 10;
+                }
+                else if (_hungryGague <= 25)
+                {
+                    _happyGague -= 10;
+                }
             }
         }
     }
