@@ -41,7 +41,6 @@ public class BearStatus : MonoBehaviour
     {
         GameManager.Instance.StopCoin.AddListener(StopCoinSpawn);
         GameManager.Instance.RestartCoin.AddListener(RestartCoinSpawn);
-        GameManager.Instance.EventTime.AddListener(ChangeStatus);
     }
 
     /// <summary>
