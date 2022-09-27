@@ -8,12 +8,12 @@ public class BearGroup : MonoBehaviour
     public int BearGroupSize = 20;
     
     private GameObject[] _bearPool;
-    private int _bearPoolCount = 0;
-
+    private int _bearNum;
 
 
     void Start()
     {
+        _bearNum = 0;
         CreateBearPool(BearGroupSize);
         
         Vector3 StartPosition = new Vector3(0f, 0f, 0f);
@@ -27,7 +27,7 @@ public class BearGroup : MonoBehaviour
         for(int i = 0; i < BearGroupSize; i++)
         {
             _bearPool[i] = Instantiate(CuteBear);
-            _bearPool[i].name = "CuteBear-" + (i + 1);
+            _bearPool[i].name = "CuteBear_" + (i + 1);
             _bearPool[i].transform.parent = gameObject.transform;
             _bearPool[i].SetActive(false);
         }
@@ -44,6 +44,8 @@ public class BearGroup : MonoBehaviour
                 break;
             }
         }
+        ++_bearNum;
+        GameManager.Instance.BearCount = _bearNum;
     }
 
     public void DeleteBear()
@@ -55,5 +57,7 @@ public class BearGroup : MonoBehaviour
                 _bearPool[i - 1].SetActive(false);
             }
         }
+        --_bearNum;
+        GameManager.Instance.BearCount = _bearNum;
     }
 }

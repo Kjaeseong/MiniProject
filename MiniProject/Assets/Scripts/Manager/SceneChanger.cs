@@ -14,6 +14,14 @@ public class SceneChanger : MonoBehaviour
         OptionWindow.SetActive(false);
     }
 
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            CloseCreditScene();
+        }
+    }
+
     public void TitleScene()
     {
         SceneManager.LoadScene("TItleScene");
@@ -34,5 +42,11 @@ public class SceneChanger : MonoBehaviour
     {
         CreditWindow.SetActive(true);
         TitleWindow.SetActive(false);
+    }
+
+    public void CloseCreditScene()
+    {
+        CreditWindow.SetActive(false);
+        TitleWindow.SetActive(true);
     }
 }

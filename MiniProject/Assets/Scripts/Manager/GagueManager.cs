@@ -89,6 +89,7 @@ public class GagueManager : MonoBehaviour
         if (_happyGague >= 100)
         {
             HappyGaugeManagement.EventStep = (int)HappyGagueManager.State.CHANGE_BACKGROUND;
+            _happyGague = 50;
             _happyGagueBar.color = Color.yellow;
         }
         else if (_happyGague >= 90 && _happyGague < 100)
@@ -102,7 +103,6 @@ public class GagueManager : MonoBehaviour
         {
             Debug.Log("Orange / 앵그리곰이벤트 / 코인 생산시간 2배 / Idle모션 랜덤출력");
             HappyGaugeManagement.EventStep = (int)HappyGagueManager.State.ANGRY_BEAR;
-            GameManager.Instance.AngryBearStatus();
             _happyGagueBar.color = Color.cyan;
         }
         else if (1 <= _happyGague && _happyGague <= 15)
@@ -113,7 +113,7 @@ public class GagueManager : MonoBehaviour
         }
         else if (0 >= _happyGague)
         {
-            Debug.Log("Game Over");
+            UIManager.Instance.GameOverUI();
         }
 
         if (16 >= _happyGague && _happyGague <=100)

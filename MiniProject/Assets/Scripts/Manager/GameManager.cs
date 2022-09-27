@@ -41,14 +41,13 @@ public class GameManager : SingletonBehaviour<GameManager>
 
     public bool IsShowMenu { get; private set; }
 
-    public int BearCount { get; private set; }
+    public int BearCount { get; set; }
 
     public bool IsEventTime { get; private set; }
 
     private void Start()
     {
         IsEventTime = false;
-        BearCount = 1;
         _foodPrice = BearCount * 10;
         _spawnPositions = new GameObject[4];
         for (int i = 0; i < 4; ++i)
@@ -73,15 +72,6 @@ public class GameManager : SingletonBehaviour<GameManager>
     {
         RemainCoin += GetCoinAmount;
         _goldUI.text = $"Gold : {RemainCoin}G";
-    }
-
-    /// <summary>
-    /// 타이틀씬으로 돌아가기
-    /// </summary>
-    public void GoingToTitleScene()
-    {
-        Time.timeScale = 1f;
-        SceneManager.LoadScene(0);
     }
 
     /// <summary>
@@ -117,22 +107,6 @@ public class GameManager : SingletonBehaviour<GameManager>
     }
 
     /// <summary>
-    /// 메뉴 닫기
-    /// </summary>
-    public void Menu()
-    {
-        IsShowMenu = !IsShowMenu;
-        if(IsShowMenu == true)
-        {
-            Time.timeScale = 0f;
-        }
-        else
-        {
-            Time.timeScale = 1f;
-        }
-        _pauseMenu.SetActive(IsShowMenu);
-    }
-    /// <summary>
     /// 곰 살때 실행되는 함수
     /// </summary>
     public void BuyNewBear()
@@ -143,15 +117,13 @@ public class GameManager : SingletonBehaviour<GameManager>
         }
         else
         {
+            int num = Random.Range(0, 4);
+            BearGroup.BirthBear(_spawnPositions[num].transform.position);
+
             RemainCoin -= BearPrice;
             _goldUI.text = $"Gold : {RemainCoin}G";
-            ++BearCount;
             _foodPrice = BearCount * 10;
-            int num = Random.Range(0, 4);
-            //GameObject SpawnBear = Instantiate(_bear);
-            //SpawnBear.transform.position = _spawnPositions[num].transform.position;
 
-            BearGroup.BirthBear(_spawnPositions[num].transform.position);
         }
     }
 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HappyGagueManager : MonoBehaviour
 {
@@ -13,12 +14,24 @@ public class HappyGagueManager : MonoBehaviour
         CHANGE_BACKGROUND
     };
 
+    [SerializeField]
+    private Sprite[] _backgroundImage;
+    [SerializeField]
+    private Image _nowBackGroundImage;
+
     public int EventStep { get; set; }
 
     private bool _finishFeverTime;
+    private bool _deleteBear;
+    private int _backGroundIndex;
+
+    public BearGroup BearGroup;
 
     private void Awake()
     {
+        _backGroundIndex = 0;
+        _nowBackGroundImage.sprite = _backgroundImage[_backGroundIndex];
+        _deleteBear = false;
         _finishFeverTime = true;
     }
 
@@ -27,19 +40,36 @@ public class HappyGagueManager : MonoBehaviour
         switch (EventStep)
         {
             case (int)State.BEAR_BYE:
-                StartCoroutine(BearGoodBye());
+                if (_deleteBear == false)
+                {
+                    StartCoroutine(BearGoodBye());
+                }
+                _deleteBear = true;
                 break;
+
             case (int)State.ANGRY_BEAR:
+                GameManager.Instance.AngryBearStatus();
                 break;
+
             case (int)State.FEVER_TIME:
                 if(_finishFeverTime == true)
                 {
                     StartCoroutine(FeverTime());
                 }
                 break;
+
             case (int)State.CHANGE_BACKGROUND:
+                ++_backGroundIndex;
+                if (_backGroundIndex >= 5)
+                {
+                    UIManager.Instance.GameClearUI();
+                    break;
+                }
+                _nowBackGroundImage.sprite = _backgroundImage[_backGroundIndex];
                 break;
+
             case (int)State.DEFAULT:
+                StopCoroutine(BearGoodBye());
                 break;
         }
 
@@ -52,6 +82,8 @@ public class HappyGagueManager : MonoBehaviour
     IEnumerator BearGoodBye()
     {
         yield return new WaitForSeconds(20f);
+        BearGroup.DeleteBear();
+        _deleteBear = false;
     }
 
     IEnumerator FeverTime()
