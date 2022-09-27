@@ -145,6 +145,12 @@ MonoBehaviour:
   MoveDelayTime: 1
   MoveAmount: 3
   _animationCount: 13
+  _danceClip:
+  - {fileID: 7400000, guid: 7891bd9eac56e2d42b6c36446f73c0ed, type: 2}
+  - {fileID: 7400000, guid: a1b7fcacf27a92447bb039bec3dd2aa1, type: 2}
+  - {fileID: 7400000, guid: da2379ec2a006bf40a696ef94e1db0e9, type: 2}
+  - {fileID: 7400000, guid: bc70021bc3596134a9291d31885f64ca, type: 2}
+  - {fileID: 7400000, guid: 507650e7044acc645846fb339a2ed223, type: 2}
 --- !u!1 &7717357897856325858
 GameObject:
   m_ObjectHideFlags: 0
