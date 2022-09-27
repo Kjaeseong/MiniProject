@@ -17,7 +17,6 @@ public class SoundManager : MonoBehaviour
 
     private void Start() 
     {
-        DontDestroyOnLoad(gameObject);
         Bgm = GameObject.Find("BGM").GetComponent<AudioSource>();
         Se = GameObject.Find("SE").GetComponent<AudioSource>();
         Click = GameObject.Find("CLICK").GetComponent<AudioSource>();
@@ -62,7 +61,6 @@ public class SoundManager : MonoBehaviour
             Click.clip = ClickList[AudioTrack];
             Click.Play();
         }
-
     }
     public void ClickStop()
     {
