@@ -7,7 +7,6 @@ public class CreditWindow : MonoBehaviour
 
     public GameObject TitleWindow;
 
-
     private void FixedUpdate() 
     {
         if(Input.touchCount > 0)
