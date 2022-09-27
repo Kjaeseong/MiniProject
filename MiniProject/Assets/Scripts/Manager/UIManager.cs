@@ -13,6 +13,11 @@ public class UIManager : SingletonBehaviour<UIManager>
     private GameObject _clearUI;
     [SerializeField]
     private GameObject _gameoverUI;
+    [SerializeField]
+    private GameObject _popUpUI;
+    private PopUpUI _popUpUiScript;
+    [SerializeField]
+    private SoundManager _sound;
 
     public bool ShowFeverUI { get; private set; }
     public bool ShowPauseMenuUI { get; private set; }
@@ -29,7 +34,11 @@ public class UIManager : SingletonBehaviour<UIManager>
     {
         ShowFeverUI = !ShowFeverUI;
         _feverUI.SetActive(ShowFeverUI);
+
+        //추가 코드
+        _sound.BgmPlay(2);
     }
+
     /// <summary>
     /// 메뉴 닫기
     // </summary>
@@ -39,6 +48,7 @@ public class UIManager : SingletonBehaviour<UIManager>
         if (ShowPauseMenuUI == true)
         {
             Time.timeScale = 0f;
+            _sound.ClickPlay(1);
         }
         else
         {
@@ -54,6 +64,7 @@ public class UIManager : SingletonBehaviour<UIManager>
     {
         Time.timeScale = 0f;
         _clearUI.SetActive(true);
+        _sound.BgmPlay(4);
     }
 
     /// <summary>
@@ -63,6 +74,7 @@ public class UIManager : SingletonBehaviour<UIManager>
     {
         Time.timeScale = 0f;
         _gameoverUI.SetActive(true);
+        _sound.BgmPlay(3);
     }
 
     /// <summary>
@@ -74,5 +86,21 @@ public class UIManager : SingletonBehaviour<UIManager>
         _clearUI.SetActive(false);
         _gameoverUI.SetActive(false);
         SceneManager.LoadScene(0);
+    }
+
+    /// <summary>
+    /// 팝업창 UI 호출. 매개변수로 이벤트명 입력(CSV파일 참고)
+    /// </summary>
+    public void PopUpUI(string description)
+    {
+        if(_popUpUiScript != null)
+        {
+            _popUpUiScript = _popUpUI.GetComponent<PopUpUI>();
+        }
+
+        Time.timeScale = 0f;
+        _popUpUI.SetActive(true);
+        _popUpUiScript.PopUpText(description);
+        _sound.SePlay(2);
     }
 }
