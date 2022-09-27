@@ -765,8 +765,8 @@ MonoBehaviour:
   _happyGagueUI: {fileID: 221544521}
   _happyGagueBar: {fileID: 486649778}
   HappyGaugeManagement: {fileID: 370549581}
-  _hungryGague: 0
-  _happyGague: 0
+  _hungryGague: 100
+  _happyGague: 50
   RestoreAmount: 1
 --- !u!4 &498076490
 Transform:
@@ -1252,6 +1252,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   RestartCoin:
+    m_PersistentCalls:
+      m_Calls: []
+  EventTime:
     m_PersistentCalls:
       m_Calls: []
   _bear: {fileID: 7717357897842414328, guid: 0f0b2dd338dfe2e4aba9b8aaf18f821b, type: 3}
