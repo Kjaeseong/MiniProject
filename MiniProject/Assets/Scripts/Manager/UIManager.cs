@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class UIManager : SingletonBehaviour<UIManager>
 {
@@ -14,13 +15,22 @@ public class UIManager : SingletonBehaviour<UIManager>
     [SerializeField]
     private GameObject _gameoverUI;
 
+    [SerializeField]
+    private Button _pauseButton;
+    [SerializeField]
+    private Button _buyBearButton;
+    [SerializeField]
+    private Button _buyFoodButton;
+
     public bool ShowFeverUI { get; private set; }
     public bool ShowPauseMenuUI { get; private set; }
+    public bool IsInterective { get; private set; }
 
     private void Start()
     {
         ShowFeverUI = false;
         ShowPauseMenuUI = false;
+        IsInterective = true;
     }
     /// <summary>
     /// FeverUI관련 함수
@@ -74,5 +84,13 @@ public class UIManager : SingletonBehaviour<UIManager>
         _clearUI.SetActive(false);
         _gameoverUI.SetActive(false);
         SceneManager.LoadScene(0);
+    }
+
+    public void ChangeInterection()
+    {
+        IsInterective = !IsInterective;
+        _pauseButton.interactable = IsInterective;
+        _buyBearButton.interactable = IsInterective;
+        _buyFoodButton.interactable = IsInterective;
     }
 }
