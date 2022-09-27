@@ -1409,6 +1409,7 @@ MonoBehaviour:
   _pauseMenu: {fileID: 629237957}
   _positions: {fileID: 1198013813}
   GetCoinAmount: 100
+  StandardCoinAmount: 100
   BearPrice: 10
 --- !u!4 &822606082
 Transform:

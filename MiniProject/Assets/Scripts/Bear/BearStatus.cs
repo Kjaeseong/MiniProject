@@ -220,5 +220,6 @@ public class BearStatus : MonoBehaviour
     {
         GameManager.Instance.StopCoin.RemoveListener(StopCoinSpawn);
         GameManager.Instance.RestartCoin.RemoveListener(RestartCoinSpawn);
+        GameManager.Instance.EventTime.RemoveListener(FeverTime);
     }
 }
