@@ -157,6 +157,7 @@ public class BearStatus : MonoBehaviour
     }
     private void EndFeverTime()
     {
+        _spawnCoinTime = _standardSpawnCoin;
         _ani.SetBool("canMove", false);
     }
 
