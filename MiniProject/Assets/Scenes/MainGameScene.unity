@@ -532,6 +532,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &217475139 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 469699141980165157, guid: f0130c182900f464f96d75b39da1fe7e, type: 3}
+  m_PrefabInstance: {fileID: 469699141794987110}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &221544519
 GameObject:
   m_ObjectHideFlags: 0
@@ -1078,7 +1083,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 650950091}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -14.62}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1473,6 +1478,51 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &957244386
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 957244387}
+  - component: {fileID: 957244388}
+  m_Layer: 0
+  m_Name: UIManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &957244387
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 957244386}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.8363019, y: 0.74079394, z: 2.7738512}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &957244388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 957244386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2119a6e86a170b4bb89439096770bc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FeverUI: {fileID: 217475139}
 --- !u!1 &970119018
 GameObject:
   m_ObjectHideFlags: 0
@@ -1486,7 +1536,7 @@ GameObject:
   - component: {fileID: 970119020}
   - component: {fileID: 970119019}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: MapCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2690,3 +2740,68 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c0c755b39e262754d8c66f35fe63cad7, type: 3}
+--- !u!1001 &469699141794987110
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 469699141861417542, guid: f0130c182900f464f96d75b39da1fe7e, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 603937160}
+    - target: {fileID: 469699141980165152, guid: f0130c182900f464f96d75b39da1fe7e, type: 3}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 469699141980165152, guid: f0130c182900f464f96d75b39da1fe7e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.2037609
+      objectReference: {fileID: 0}
+    - target: {fileID: 469699141980165152, guid: f0130c182900f464f96d75b39da1fe7e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.62444544
+      objectReference: {fileID: 0}
+    - target: {fileID: 469699141980165152, guid: f0130c182900f464f96d75b39da1fe7e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.7609494
+      objectReference: {fileID: 0}
+    - target: {fileID: 469699141980165152, guid: f0130c182900f464f96d75b39da1fe7e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 469699141980165152, guid: f0130c182900f464f96d75b39da1fe7e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 469699141980165152, guid: f0130c182900f464f96d75b39da1fe7e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 469699141980165152, guid: f0130c182900f464f96d75b39da1fe7e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 469699141980165152, guid: f0130c182900f464f96d75b39da1fe7e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 469699141980165152, guid: f0130c182900f464f96d75b39da1fe7e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 469699141980165152, guid: f0130c182900f464f96d75b39da1fe7e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 469699141980165157, guid: f0130c182900f464f96d75b39da1fe7e, type: 3}
+      propertyPath: m_Name
+      value: FeverTimeUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 469699141980165157, guid: f0130c182900f464f96d75b39da1fe7e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f0130c182900f464f96d75b39da1fe7e, type: 3}

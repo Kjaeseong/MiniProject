@@ -46,6 +46,24 @@ public class BearStatus : MonoBehaviour
         GameManager.Instance.StopCoin.AddListener(StopCoinSpawn);
         GameManager.Instance.RestartCoin.AddListener(RestartCoinSpawn);
         GameManager.Instance.EventTime.AddListener(FeverTime);
+        GameManager.Instance.AngryBear.AddListener(ReleaseCoinTime);
+        GameManager.Instance.NormalBear.AddListener(ResetCoinTime);
+    }
+
+    /// <summary>
+    /// 코인 생성시간 늘림
+    /// </summary>
+    private void ReleaseCoinTime()
+    {
+        _spawnCoinTime = _standardSpawnCoin * 2;
+    }
+
+    /// <summary>
+    /// 코인 생성시간 원상복구
+    /// </summary>
+    private void ResetCoinTime()
+    {
+        _spawnCoinTime = _standardSpawnCoin;
     }
 
     /// <summary>
@@ -66,7 +84,7 @@ public class BearStatus : MonoBehaviour
 
     private void Update()
     {
-        if(_finishBirth == true)
+        if (_finishBirth == true)
         { // 행복게이지로 인한 이벤트 타임이면 이벤트 타임이 최우선 적용
             if (GameManager.Instance.IsEventTime == false)
             {
@@ -222,5 +240,6 @@ public class BearStatus : MonoBehaviour
         GameManager.Instance.StopCoin.RemoveListener(StopCoinSpawn);
         GameManager.Instance.RestartCoin.RemoveListener(RestartCoinSpawn);
         GameManager.Instance.EventTime.RemoveListener(FeverTime);
+        GameManager.Instance.AngryBear.RemoveListener(ReleaseCoinTime);
     }
 }

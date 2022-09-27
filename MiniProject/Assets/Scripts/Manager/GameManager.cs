@@ -11,6 +11,8 @@ public class GameManager : SingletonBehaviour<GameManager>
     public UnityEvent StopCoin = new UnityEvent();
     public UnityEvent RestartCoin = new UnityEvent();
     public UnityEvent EventTime = new UnityEvent();
+    public UnityEvent AngryBear = new UnityEvent();
+    public UnityEvent NormalBear = new UnityEvent();
 
     [SerializeField] //곰 오브젝트
     private GameObject _bear;
@@ -168,5 +170,21 @@ public class GameManager : SingletonBehaviour<GameManager>
             _goldUI.text = $"Gold : {RemainCoin}G";
             BuyFood.Invoke();
         }
+    }
+
+    /// <summary>
+    /// 화난곰 이벤트
+    /// </summary>
+    public void AngryBearStatus()
+    {
+        AngryBear.Invoke();
+    }
+
+    /// <summary>
+    /// 늘어난 코인 생성 원상복구
+    /// </summary>
+    public void RollbackBearStatus()
+    {
+        NormalBear.Invoke();
     }
 }

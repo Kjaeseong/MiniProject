@@ -19,8 +19,9 @@ public class GagueManager : MonoBehaviour
 
     public HappyGagueManager HappyGaugeManagement;
     private float DecreaseTime = 10f;
-    // 배고픔 수치
+    private Color _standardColor;
 
+    // 배고픔 수치
     // 먹이 살때 회복되는 양 (테스트용 public 추후 private 수정 예정)
     [Range(0, 100)] public int _hungryGague;
     // 행복게이지 (테스트용 public, 추후 private 수정 예정)
@@ -36,6 +37,7 @@ public class GagueManager : MonoBehaviour
 
     private void Start()
     {
+        _standardColor = _happyGagueBar.color;
         _hungryGague = 100;
         Invoke("StartReduce",3f);
         Invoke("CheckGague", 3f);
@@ -80,6 +82,7 @@ public class GagueManager : MonoBehaviour
     {
         _happyGagueUI.text = $"Happy : {_happyGague}";
         _happyGagueBar.fillAmount = (float)_happyGague / 100;
+        _happyGagueBar.color = _standardColor;
 
         HappyGaugeManagement.EventStep = (int)HappyGagueManager.State.DEFAULT;
 
@@ -99,6 +102,7 @@ public class GagueManager : MonoBehaviour
         {
             Debug.Log("Orange / 앵그리곰이벤트 / 코인 생산시간 2배 / Idle모션 랜덤출력");
             HappyGaugeManagement.EventStep = (int)HappyGagueManager.State.ANGRY_BEAR;
+            GameManager.Instance.AngryBearStatus();
             _happyGagueBar.color = Color.cyan;
         }
         else if (1 <= _happyGague && _happyGague <= 15)
@@ -110,6 +114,11 @@ public class GagueManager : MonoBehaviour
         else if (0 >= _happyGague)
         {
             Debug.Log("Game Over");
+        }
+
+        if (16 >= _happyGague && _happyGague <=100)
+        {
+            GameManager.Instance.RollbackBearStatus();
         }
     }
 
@@ -147,10 +156,18 @@ public class GagueManager : MonoBehaviour
                 if (_hungryGague >= 90)
                 {
                     _happyGague += 10;
+                    if (_happyGague > 100)
+                    {
+                        _happyGague = 100;
+                    }
                 }
                 else if (_hungryGague <= 25)
                 {
                     _happyGague -= 10;
+                    if (_happyGague < 0)
+                    {
+                        _happyGague = 0;
+                    }
                 }
             }
         }

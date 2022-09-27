@@ -57,11 +57,13 @@ public class HappyGagueManager : MonoBehaviour
     IEnumerator FeverTime()
     {
         _finishFeverTime = false;
+        UIManager.Instance.AboutFeverUI();
         GameManager.Instance.ChangeStatus();
         GameManager.Instance.StartEventTime();
         GameManager.Instance.GetCoinAmount = GameManager.Instance.StandardCoinAmount * 2;
         yield return new WaitForSeconds(30f);
 
+        UIManager.Instance.AboutFeverUI();
         GameManager.Instance.ChangeStatus();
         GameManager.Instance.GetCoinAmount = GameManager.Instance.StandardCoinAmount;
         Invoke("FinishFeverTime", 20f);
