@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
-public class GameManager : SingletonBehaviour<GameManager>
+public class BackUp_GameManager : SingletonBehaviour<BackUp_GameManager>
 {
     public UnityEvent BuyFood = new UnityEvent();
     public UnityEvent StopCoin = new UnityEvent();
@@ -27,7 +27,6 @@ public class GameManager : SingletonBehaviour<GameManager>
     private GameObject _pauseMenu;
     [SerializeField]
     private GameObject _positions;
-    public BearGroup BearGroup;
 
     public int RemainCoin { get; private set; }
 
@@ -127,10 +126,9 @@ public class GameManager : SingletonBehaviour<GameManager>
             ++BearCount;
             _foodPrice = BearCount * 10;
             int num = Random.Range(0, 4);
-            //GameObject SpawnBear = Instantiate(_bear);
-            //SpawnBear.transform.position = _spawnPositions[num].transform.position;
+            GameObject SpawnBear = Instantiate(_bear);
 
-            BearGroup.BirthBear(_spawnPositions[num].transform.position);
+            SpawnBear.transform.position = _spawnPositions[num].transform.position;
         }
     }
 
@@ -150,4 +148,5 @@ public class GameManager : SingletonBehaviour<GameManager>
             BuyFood.Invoke();
         }
     }
+
 }

@@ -15,6 +15,13 @@ public class HappyGagueManager : MonoBehaviour
 
     public int EventStep { get; set; }
 
+    private bool _finishFeverTime;
+
+    private void Awake()
+    {
+        _finishFeverTime = true;
+    }
+
     void Update()
     {
         switch (EventStep)
@@ -25,6 +32,10 @@ public class HappyGagueManager : MonoBehaviour
             case (int)State.ANGRY_BEAR:
                 break;
             case (int)State.FEVER_TIME:
+                if(_finishFeverTime == true)
+                {
+                    //StartCoroutine(FeverTime());
+                }
                 break;
             case (int)State.CHANGE_BACKGROUND:
                 break;
@@ -37,6 +48,19 @@ public class HappyGagueManager : MonoBehaviour
     IEnumerator BearGoodBye()
     {
         yield return new WaitForSeconds(20f);
+    }
+
+/*
+    IEnumerator FeverTime()
+    {
+        _finishFeverTime = false;
+        GameManager.Instance.ChangeStatus();
+        GameManager.Instance.StartEventTime();
+        yield return new WaitForSeconds(30f);
+        GameManager.Instance.ChangeStatus();
+        yield return new WaitForSeconds(20f);
+        _finishFeverTime = true;
 
     }
+*/
 }
