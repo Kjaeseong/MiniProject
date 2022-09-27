@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class CreditWindow : MonoBehaviour
 {
-
     public GameObject TitleWindow;
+    public SoundManager SoundManager;
+
+    private void OnEnable() 
+    {
+        SoundManager.SePlay(4);
+    }
 
     private void FixedUpdate() 
     {
@@ -19,5 +24,6 @@ public class CreditWindow : MonoBehaviour
     {
         gameObject.SetActive(false);
         TitleWindow.SetActive(true);
+        SoundManager.SeStop();
     }
 }
