@@ -23,11 +23,9 @@ public class BearStatus : MonoBehaviour
     [SerializeField]
     private int _animationCount = 13;
 
-    public bool IsEventTime { get; private set; }
 
     private void Start()
     {
-        IsEventTime = false;
         _playCount = 0;
         _index = Random.Range(1, 14);
         _rigid = GetComponent<Rigidbody2D>();
@@ -44,14 +42,6 @@ public class BearStatus : MonoBehaviour
         GameManager.Instance.StopCoin.AddListener(StopCoinSpawn);
         GameManager.Instance.RestartCoin.AddListener(RestartCoinSpawn);
         GameManager.Instance.EventTime.AddListener(ChangeStatus);
-    }
-
-    /// <summary>
-    /// 이벤트 타임 상태 변경
-    /// </summary>
-    private void ChangeStatus()
-    {
-        IsEventTime = !IsEventTime;
     }
 
     /// <summary>
@@ -73,7 +63,7 @@ public class BearStatus : MonoBehaviour
     private void Update()
     {
         // 행복게이지로 인한 이벤트 타임이면 이벤트 타임이 최우선 적용
-        if (IsEventTime == false)
+        if (GameManager.Instance.IsEventTime == false)
         {
             // 2초 움직이고 4초 IDLE
             _elapsedTime += Time.deltaTime;

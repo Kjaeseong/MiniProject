@@ -39,8 +39,11 @@ public class GameManager : SingletonBehaviour<GameManager>
 
     public int BearCount { get; private set; }
 
+    public bool IsEventTime { get; private set; }
+
     private void Start()
     {
+        IsEventTime = false;
         BearCount = 1;
         _foodPrice = BearCount * 10;
         _spawnPositions = new GameObject[4];
@@ -57,6 +60,11 @@ public class GameManager : SingletonBehaviour<GameManager>
         // 테스트용 코드
         _bearPriceUI.text = $"Buy\nBear\n{BearPrice}G";
         _foodPriceUI.text = $"Buy\nFood\n{_foodPrice}G";
+    }
+
+    public void ChangeStatus()
+    {
+        IsEventTime = !IsEventTime;
     }
 
     /// <summary>
