@@ -28,12 +28,18 @@ public class HappyGagueManager : MonoBehaviour
     [SerializeField]
     private BearGroup BearGroup;
 
+    [SerializeField]
+    private GameObject _popUp;
+    private PopUpUI _popUpScript;
+
     private void Awake()
     {
         _backGroundIndex = 0;
         _nowBackGroundImage.sprite = _backgroundImage[_backGroundIndex];
         _deleteBear = false;
         _finishFeverTime = true;
+
+        _popUpScript = _popUp.GetComponent<PopUpUI>();
     }
 
     void Update()
@@ -83,12 +89,16 @@ public class HappyGagueManager : MonoBehaviour
     IEnumerator BearGoodBye()
     {
         yield return new WaitForSeconds(20f);
+
+        string[] arr = {"BearBye1", "BearBye2"};
+        PopUp(arr[Random.Range(0, 2)]);
         BearGroup.DeleteBear();
         _deleteBear = false;
     }
 
     IEnumerator FeverTime()
     {
+        PopUp("FeverTime");
         _finishFeverTime = false;
         UIManager.Instance.AboutFeverUI();
         UIManager.Instance.ChangeInterection();
@@ -102,5 +112,11 @@ public class HappyGagueManager : MonoBehaviour
         GameManager.Instance.ChangeStatus();
         GameManager.Instance.GetCoinAmount = GameManager.Instance.StandardCoinAmount;
         Invoke("CooltimeFeverTime", 30f);
+    }
+
+    private void PopUp(string description)
+    {
+        _popUp.SetActive(true);
+        _popUpScript.PopUpText(description);
     }
 }
