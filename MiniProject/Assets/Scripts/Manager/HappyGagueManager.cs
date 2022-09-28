@@ -22,8 +22,6 @@ public class HappyGagueManager : MonoBehaviour
     public int EventStep { get; set; }
 
     private bool _finishFeverTime;
-    private bool _deleteBear;
-    private bool _stopDeleteBear;
     private int _backGroundIndex;
 
     [SerializeField]
@@ -105,13 +103,6 @@ public class HappyGagueManager : MonoBehaviour
     private void CooltimeFeverTime()
     {
         _finishFeverTime = true;
-    }
-
-    IEnumerator BearGoodBye()
-    {
-        yield return new WaitForSeconds(20f);
-
-        
     }
 
     IEnumerator FeverTime()
