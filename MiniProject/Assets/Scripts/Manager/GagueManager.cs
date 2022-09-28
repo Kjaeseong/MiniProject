@@ -34,6 +34,7 @@ public class GagueManager : MonoBehaviour
     private bool _stopEat = true;
     private bool _coinStop;
 
+    private bool _isGameOver;
 
     
     public int RestoreAmount = 1;
@@ -124,7 +125,11 @@ public class GagueManager : MonoBehaviour
         }
         else if (0 >= _happyGague)
         {
-            UIManager.Instance.GameOverUI();
+            if(!_isGameOver)
+            {
+                UIManager.Instance.GameOverUI();
+                _isGameOver = true;
+            }
         }
 
         if (25 < _happyGague && _happyGague <=100)
