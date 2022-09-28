@@ -34,7 +34,7 @@ public class GameManager : SingletonBehaviour<GameManager>
 
     public int RemainCoin { get; private set; }
 
-    public int GetCoinAmount = 5;
+    public int GetCoinAmount = 100;
     public int StandardCoinAmount { get; private set; }
     private int BearPrice = 80;
     private int _foodPrice;
@@ -123,7 +123,7 @@ public class GameManager : SingletonBehaviour<GameManager>
 
             RemainCoin -= BearPrice;
             _goldUI.text = $"Gold : {RemainCoin}G";
-            _foodPrice = BearCount * 10;
+            _foodPrice = BearCount * 5;
 
         }
     }
