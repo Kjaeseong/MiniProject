@@ -10,6 +10,7 @@ public class OptionWindow : MonoBehaviour
 
     public GameObject _titleWindow;
     public SoundManager SoundManagement;
+    public VolumeManager VolumeManager;
 
     private void OnEnable() 
     {
@@ -22,6 +23,8 @@ public class OptionWindow : MonoBehaviour
     {
         SoundManagement.BgmVolume = BgmSlider.value;
         SoundManagement.SeVolume = SeSlider.value;
+        VolumeManager.BgmVolume = BgmSlider.value;
+        VolumeManager.SeVolume = SeSlider.value;
 
         SoundManagement.ChangeVolume();
     }
