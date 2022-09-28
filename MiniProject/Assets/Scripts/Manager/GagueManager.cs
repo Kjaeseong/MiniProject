@@ -21,18 +21,27 @@ public class GagueManager : MonoBehaviour
     private float DecreaseTime = 10f;
     private Color _standardColor;
 
+    [SerializeField]
+    private GameObject _popUp;
+    private PopUpUI _popUpScript;
+
     // 배고픔 수치
     // 먹이 살때 회복되는 양 (테스트용 public 추후 private 수정 예정)
     [Range(0, 100)] public int _hungryGague;
     // 행복게이지 (테스트용 public, 추후 private 수정 예정)
     [Range(0, 100)] public int _happyGague;
 
+    private bool _stopEat = true;
+    private bool _coinStop;
 
+
+    
     public int RestoreAmount = 1;
 
     private void OnEnable()
     {
         GameManager.Instance.BuyFood.AddListener(RestoreHungryGague);
+        _popUpScript = _popUp.GetComponent<PopUpUI>();
     }
 
     private void Start()
@@ -76,6 +85,8 @@ public class GagueManager : MonoBehaviour
 
         _hungrygagueUI.text = $"Hungry : {_hungryGague}";
         _gagueBar.fillAmount = (float)_hungryGague / 100;
+
+        HungryCheck();
     }
 
     private void GagueUpdate()
@@ -155,6 +166,7 @@ public class GagueManager : MonoBehaviour
             {
                 if (_hungryGague >= 90)
                 {
+                    PopUp("HappyGagueUp");
                     _happyGague += 10;
                     if (_happyGague > 100)
                     {
@@ -163,6 +175,7 @@ public class GagueManager : MonoBehaviour
                 }
                 else if (_hungryGague <= 25)
                 {
+                    PopUp("HappyGagueDown");
                     _happyGague -= 10;
                     if (_happyGague < 0)
                     {
@@ -173,9 +186,44 @@ public class GagueManager : MonoBehaviour
         }
     }
 
+    private void HungryCheck()
+    {
+        if(_hungryGague <= 0)
+        {
+            if(!_coinStop)
+            {
+                PopUp("CoinStop");
+                _coinStop = true;
+            }
+        }
+        else
+        {
+            _coinStop = false;
+        }
+
+        if(_hungryGague >= 100)
+        {
+            if(!_stopEat)
+            {
+                PopUp("StopEat");
+                _stopEat = true;
+            }
+        }
+        else
+        {
+            _stopEat = false;
+        }
+    }
+
     private void OnDisable()
     {
         GameManager.Instance.BuyFood.RemoveListener(RestoreHungryGague);
+    }
+
+    private void PopUp(string description)
+    {
+        _popUp.SetActive(true);
+        _popUpScript.PopUpText(description);
     }
 
 }

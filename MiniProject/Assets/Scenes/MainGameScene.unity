@@ -969,6 +969,7 @@ MonoBehaviour:
   _happyGagueUI: {fileID: 221544521}
   _happyGagueBar: {fileID: 486649778}
   HappyGaugeManagement: {fileID: 370549581}
+  _popUp: {fileID: 2034456065}
   _hungryGague: 100
   _happyGague: 50
   RestoreAmount: 1
