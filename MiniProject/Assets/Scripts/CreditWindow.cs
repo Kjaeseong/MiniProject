@@ -12,18 +12,14 @@ public class CreditWindow : MonoBehaviour
         SoundManager.SePlay(4);
     }
 
-    private void FixedUpdate() 
+    private void OnDisable()
     {
-        if(Input.touchCount > 0)
-        {
-            DeActivate();
-        }
-    }
-
-    private void DeActivate()
-    {
-        gameObject.SetActive(false);
         TitleWindow.SetActive(true);
         SoundManager.SeStop();
+    }
+
+    public void DeActivate()
+    {
+        gameObject.SetActive(false);
     }
 }

@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-    [Range(0, 1)]public float BgmVolume = 0.5f;
-    [Range(0, 1)]public float SeVolume = 0.5f;
+    [Range(0, 1)]public float BgmVolume;
+    [Range(0, 1)]public float SeVolume;
 
     [Space(9)]
     public AudioSource Bgm;
@@ -17,11 +17,15 @@ public class SoundManager : MonoBehaviour
     public AudioSource Click;
     public List<AudioClip> ClickList = new List<AudioClip>();
 
+    public VolumeManager _volume;
 
     private void Start() 
     {
-        DontDestroyOnLoad(gameObject);
-        BgmPlay(0);
+        _volume = GameObject.Find("VolumeManager").GetComponent<VolumeManager>();
+        BgmVolume = _volume.BgmVolume;
+        SeVolume = _volume.SeVolume;
+
+        ChangeVolume();
     }
 
     public void BgmPlay(int AudioTrack)
@@ -74,6 +78,4 @@ public class SoundManager : MonoBehaviour
         Se.volume = SeVolume;
         Click.volume = SeVolume;
     }
-
-    
 }
