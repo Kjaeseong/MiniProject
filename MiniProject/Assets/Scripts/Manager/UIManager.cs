@@ -71,9 +71,8 @@ public class UIManager : SingletonBehaviour<UIManager>
     /// </summary>
     public void GameClearUI()
     {
-        Time.timeScale = 0f;
-        _clearUI.SetActive(true);
         _sound.BgmPlay(4);
+        _clearUI.SetActive(true);
     }
 
     /// <summary>
@@ -81,9 +80,8 @@ public class UIManager : SingletonBehaviour<UIManager>
     /// </summary>
     public void GameOverUI()
     {
-        Time.timeScale = 0f;
-        _gameoverUI.SetActive(true);
         _sound.BgmPlay(3);
+        _gameoverUI.SetActive(true);
     }
 
     /// <summary>
