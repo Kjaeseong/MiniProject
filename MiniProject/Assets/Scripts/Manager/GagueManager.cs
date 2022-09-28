@@ -116,7 +116,7 @@ public class GagueManager : MonoBehaviour
             UIManager.Instance.GameOverUI();
         }
 
-        if (16 >= _happyGague && _happyGague <=100)
+        if (25 < _happyGague && _happyGague <=100)
         {
             GameManager.Instance.RollbackBearStatus();
         }

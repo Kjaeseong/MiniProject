@@ -35,8 +35,8 @@ public class GameManager : SingletonBehaviour<GameManager>
     public int RemainCoin { get; private set; }
 
     public int GetCoinAmount = 5;
-    public int StandardCoinAmount = 100;
-    public int BearPrice = 1000;
+    public int StandardCoinAmount { get; private set; }
+    private int BearPrice = 80;
     private int _foodPrice;
 
     public bool IsShowMenu { get; private set; }
@@ -48,8 +48,9 @@ public class GameManager : SingletonBehaviour<GameManager>
     private void Start()
     {
         IsEventTime = false;
-        _foodPrice = BearCount * 10;
+        _foodPrice = BearCount * 5;
         _spawnPositions = new GameObject[4];
+        StandardCoinAmount = 100;
         for (int i = 0; i < 4; ++i)
         {
             _spawnPositions[i] = _positions.transform.GetChild(i).gameObject;

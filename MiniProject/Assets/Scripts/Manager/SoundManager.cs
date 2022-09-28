@@ -18,11 +18,6 @@ public class SoundManager : MonoBehaviour
     public List<AudioClip> ClickList = new List<AudioClip>();
 
 
-    private void Start() 
-    {
-        BgmPlay(0);
-    }
-
     public void BgmPlay(int AudioTrack)
     {
         if(BgmList.Count > 0)
@@ -33,9 +28,16 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    public void BgmStop()
+    public void BgmPause()
     {
-        Bgm.Stop();
+        Bgm.Pause();
+        Se.Pause();
+    }
+
+    public void BgmContinue()
+    {
+        Bgm.UnPause();
+        Se.UnPause();
     }
 
     public void SePlay(int AudioTrack)

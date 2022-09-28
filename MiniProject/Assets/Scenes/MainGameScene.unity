@@ -1247,6 +1247,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1700332009}
+        m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
+        m_MethodName: ClickPlay
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &718602451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1485,8 +1497,6 @@ MonoBehaviour:
   _positions: {fileID: 1198013813}
   BearGroup: {fileID: 324591689}
   GetCoinAmount: 100
-  StandardCoinAmount: 100
-  BearPrice: 10
 --- !u!4 &822606082
 Transform:
   m_ObjectHideFlags: 0
@@ -2029,6 +2039,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5426187701299122471, guid: 919bb9f38ccc8724090369be7e526dc8, type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5426187701299122472, guid: 919bb9f38ccc8724090369be7e526dc8, type: 3}
+      propertyPath: m_PixelPerfect
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5426187701299122475, guid: 919bb9f38ccc8724090369be7e526dc8, type: 3}
@@ -2876,6 +2890,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PopUpUI
       objectReference: {fileID: 0}
+    - target: {fileID: 4330519641721288590, guid: 079e74389216ec84290fa9e79ee22238, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4330519643340060099, guid: 079e74389216ec84290fa9e79ee22238, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 2
@@ -3346,7 +3364,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 176275054205566049, guid: c0c755b39e262754d8c66f35fe63cad7, type: 3}
       propertyPath: m_ScaleFactor
-      value: 2
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 176275054205566049, guid: c0c755b39e262754d8c66f35fe63cad7, type: 3}
       propertyPath: m_PresetInfoIsWorld
@@ -3513,5 +3531,9 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 469699143458617355, guid: f0130c182900f464f96d75b39da1fe7e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: afbc0fffcdb817b4f97cf7b56dcac3a2, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f0130c182900f464f96d75b39da1fe7e, type: 3}
