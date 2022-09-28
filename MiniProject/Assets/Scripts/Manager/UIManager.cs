@@ -44,9 +44,6 @@ public class UIManager : SingletonBehaviour<UIManager>
     {
         ShowFeverUI = !ShowFeverUI;
         _feverUI.SetActive(ShowFeverUI);
-
-        //추가 코드
-        _sound.BgmPlay(2);
     }
 
     /// <summary>
