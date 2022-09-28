@@ -23,6 +23,7 @@ public class HappyGagueManager : MonoBehaviour
 
     private bool _finishFeverTime;
     private bool _deleteBear;
+    private bool _stopDeleteBear;
     private int _backGroundIndex;
 
     [SerializeField]
@@ -32,11 +33,15 @@ public class HappyGagueManager : MonoBehaviour
     private GameObject _popUp;
     private PopUpUI _popUpScript;
 
+    private bool _changeStatus;
+    private float _elapsedTime;
+
     private void Awake()
     {
+        _elapsedTime = 0.0f;
+        _changeStatus = false;
         _backGroundIndex = 0;
         _nowBackGroundImage.sprite = _backgroundImage[_backGroundIndex];
-        _deleteBear = false;
         _finishFeverTime = true;
 
         _popUpScript = _popUp.GetComponent<PopUpUI>();
@@ -44,18 +49,33 @@ public class HappyGagueManager : MonoBehaviour
 
     void Update()
     {
+        if(EventStep == (int)State.ANGRY_BEAR)
+        {
+            _elapsedTime = 0.0f;
+        }
+
         switch (EventStep)
         {
             case (int)State.BEAR_BYE:
-                if (_deleteBear == false)
+                _elapsedTime += Time.deltaTime;
+
+                if (_elapsedTime >= 20.0f)
                 {
-                    StartCoroutine(BearGoodBye());
+                    _elapsedTime = 0.0f;
+                    string[] arr = { "BearBye1", "BearBye2" };
+                    PopUp(arr[Random.Range(0, 2)]);
+                    BearGroup.DeleteBear();
                 }
-                _deleteBear = true;
                 break;
 
             case (int)State.ANGRY_BEAR:
-                GameManager.Instance.AngryBearStatus();
+                if (_changeStatus == false)
+                {
+                    GameManager.Instance.AngryBearStatus();
+
+                    PopUp("AngryBear");
+                }
+                _changeStatus = true;
                 break;
 
             case (int)State.FEVER_TIME:
@@ -76,7 +96,7 @@ public class HappyGagueManager : MonoBehaviour
                 break;
 
             case (int)State.DEFAULT:
-                StopCoroutine(BearGoodBye());
+                _changeStatus = false;
                 break;
         }
 
@@ -90,10 +110,7 @@ public class HappyGagueManager : MonoBehaviour
     {
         yield return new WaitForSeconds(20f);
 
-        string[] arr = {"BearBye1", "BearBye2"};
-        PopUp(arr[Random.Range(0, 2)]);
-        BearGroup.DeleteBear();
-        _deleteBear = false;
+        
     }
 
     IEnumerator FeverTime()
