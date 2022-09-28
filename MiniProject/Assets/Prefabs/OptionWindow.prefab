@@ -197,6 +197,7 @@ MonoBehaviour:
   SeSlider: {fileID: 7791828790096451674}
   _titleWindow: {fileID: 0}
   SoundManagement: {fileID: 0}
+  VolumeManager: {fileID: 0}
 --- !u!1 &7791828788685708892
 GameObject:
   m_ObjectHideFlags: 0
