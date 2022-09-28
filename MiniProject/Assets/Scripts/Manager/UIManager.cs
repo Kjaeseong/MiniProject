@@ -61,7 +61,7 @@ public class UIManager : SingletonBehaviour<UIManager>
         else
         {
             Time.timeScale = 1f;
-            _sound.BgmContinue();
+            _sound.BgmUnPause();
         }
         _menuUI.SetActive(ShowPauseMenuUI);
     }

@@ -38,9 +38,16 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    public void BgmStop()
+    public void BgmPause()
     {
-        Bgm.Stop();
+        Bgm.Pause();
+        Se.Pause();
+    }
+
+    public void BgmUnPause()
+    {
+        Bgm.UnPause();
+        Se.UnPause();
     }
 
     public void SePlay(int AudioTrack)
