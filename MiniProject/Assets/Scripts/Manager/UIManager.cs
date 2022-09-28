@@ -55,11 +55,13 @@ public class UIManager : SingletonBehaviour<UIManager>
         if (ShowPauseMenuUI == true)
         {
             Time.timeScale = 0f;
+            _sound.BgmPause();
             _sound.ClickPlay(1);
         }
         else
         {
             Time.timeScale = 1f;
+            _sound.BgmContinue();
         }
         _menuUI.SetActive(ShowPauseMenuUI);
     }
@@ -92,7 +94,7 @@ public class UIManager : SingletonBehaviour<UIManager>
         Time.timeScale = 1f;
         _clearUI.SetActive(false);
         _gameoverUI.SetActive(false);
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
 
     /// <summary>
