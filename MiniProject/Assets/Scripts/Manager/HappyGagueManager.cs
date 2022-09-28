@@ -66,6 +66,7 @@ public class HappyGagueManager : MonoBehaviour
                 break;
 
             case (int)State.CHANGE_BACKGROUND:
+                PopUp("HappyGagueMax");
                 ++_backGroundIndex;
                 if (_backGroundIndex >= 5)
                 {
