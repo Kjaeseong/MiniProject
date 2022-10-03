@@ -29,10 +29,4 @@ public class SceneChanger : MonoBehaviour
         OptionWindow.SetActive(true);
         TitleWindow.SetActive(false);
     }
-
-    public void CreditScene()
-    {
-        CreditWindow.SetActive(true);
-        TitleWindow.SetActive(false);
-    }
 }
